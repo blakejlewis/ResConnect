@@ -1,0 +1,81 @@
+<!-- views/signup.ejs -->
+<!doctype html>
+<html>
+<head>
+	<title>ResConnect Sign-Up</title>
+	<link rel="stylesheet" href="//netdna.bootstrapcdn.com/bootstrap/3.0.2/css/bootstrap.min.css"> <!-- load bootstrap css -->
+	<link rel="stylesheet" href="//netdna.bootstrapcdn.com/font-awesome/4.0.3/css/font-awesome.min.css"> <!-- load fontawesome -->
+	<style>
+		body 		{ padding-top:80px; }
+	</style>
+</head>
+<body>
+<div class="container">
+
+<div class="col-sm-6 col-sm-offset-3">
+
+	<h1><span class="fa fa-sign-in"></span> Signup</h1>
+
+	<!-- show any messages that come back with authentication -->
+	<% if (message.length > 0) { %>
+		<div class="alert alert-danger"><%= message %></div>
+	<% } %>
+
+	<!-- LOGIN FORM -->
+	<form action="/signup" method="post">
+		<div class="form-group">
+			<label>Emp ID</label>
+			<input type="number" class="form-control" name="empID">
+		</div>
+		<div class="form-group">
+			<label>Web ID</label>
+			<input type="text" class="form-control" name="webID">
+		</div>
+		<div class="form-group">
+			<label>Password</label>
+			<input type="password" class="form-control" name="password">
+		</div>
+		<div class="form-group">
+			<label>First Name</label>
+			<input type="text" class="form-control" name="firstName">
+		</div>
+		<div class="form-group">
+			<label>Last Name</label>
+			<input type="text" class="form-control" name="lastName">
+		</div>
+		<div class="form-group">
+			<label>Birthday</label>
+			<input type="date" class="form-control" name="birthday">
+		</div>
+		<div class="form-group">
+			<label>Permissions</label><br>
+			<select name="permissionsType">
+				<option value="1">Student Staff</option>
+				<option value="2">Building Supervisor</option>
+			</select>
+		</div>
+		<div class="form-group">
+			<label>Community</label><br>
+			<select name="communityID">
+				<option value="minor">Minor Hall</option>
+				<option value="martin">Martin Hall</option>
+			</select>
+		</div>
+		<div class="form-group">
+			<label>Floor Level</label>
+			<input type="number" class="form-control" name="floorLevel">
+		</div>
+
+		<button type="submit" class="btn btn-warning btn-lg">Signup</button>
+	</form>
+
+	<hr>
+
+	<p>Already have an account? <a href="/login">Login</a></p>
+	<p>Or go <a href="/">home</a>.</p>
+
+</div>
+
+</div>
+</body>
+</html>
