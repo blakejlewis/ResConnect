@@ -46,6 +46,30 @@ module.exports = function(app, passport) {
 		});
 	});
 
+	app.get('/mapping', isLoggedIn, function(req, res) {
+		res.render('mapping.ejs', {
+			Employee: req.user
+		});
+	});
+
+	app.get('/agreement', isLoggedIn, function(req, res) {
+		res.render('agreement.ejs', {
+			Employee: req.user
+		});
+	});
+
+	app.get('/proposal', isLoggedIn, function(req, res) {
+		res.render('proposal.ejs', {
+			Employee: req.user
+		});
+	});
+
+	app.get('/leadership', isLoggedIn, function(req, res) {
+		res.render('leadership.ejs', {
+			Employee: req.user
+		});
+	});
+
 	app.get('/logout', function(req, res) {
 		req.logout();
 		res.redirect('/');
