@@ -46,6 +46,12 @@ module.exports = function(app, passport) {
 		});
 	});
 
+	app.get('/duty', isLoggedIn, function(req, res) {
+		res.render('duty.ejs', {
+			Employee: req.user
+		});
+	});
+
 	app.get('/mapping', isLoggedIn, function(req, res) {
 		res.render('mapping.ejs', {
 			Employee: req.user

@@ -3,8 +3,9 @@
 <html>
 <head>
 	<title>ResConnect Home</title>
-	<link rel="stylesheet" href="//netdna.bootstrapcdn.com/bootstrap/3.0.2/css/bootstrap.min.css">
-	<link rel="stylesheet" href="//netdna.bootstrapcdn.com/font-awesome/4.0.3/css/font-awesome.min.css">
+	<link rel="stylesheet" href="//netdna.bootstrapcdn.com/bootstrap/3.0.2/css/bootstrap.min.css"> 
+	<script defer src="https://use.fontawesome.com/releases/v5.0.8/js/solid.js" integrity="sha384-+Ga2s7YBbhOD6nie0DzrZpJes+b2K1xkpKxTFFcx59QmVPaSA8c7pycsNaFwUK6l" crossorigin="anonymous"></script> <!-- load fontawesome -->
+    <script defer src="https://use.fontawesome.com/releases/v5.0.8/js/fontawesome.js" integrity="sha384-7ox8Q2yzO/uWircfojVuCQOZl+ZZBg2D2J5nkpLqzH1HY0C1dHlTKIbpRz/LG23c" crossorigin="anonymous"></script>
 	<style>
 		body 		{ padding-top:80px; word-wrap:break-word; }
 	</style>
@@ -13,8 +14,8 @@
 <div class="container">
 
 	<div class="page-header text-center">
-		<h1><span class="fa fa-anchor"></span> Welcome Back, <%= Employee.firstName%></h1>
-		<a href="/logout" class="btn btn-default btn-sm">Logout</a>
+		<h1><span class="fa fa-university"></span> Welcome Back, <%= Employee.firstName%></h1>
+		<a href="/logout" class="btn btn-default btn-sm"><span class="fa fa-sign-out-alt"></span> Logout</a>
 	</div>
 
 	<div class="row">
@@ -22,13 +23,47 @@
 		<!-- LOCAL INFORMATION -->
 		<div class="col-sm-6">
 			<div class="well">
-				<h3><span class="fa fa-user"></span> Local</h3>
+				<h3><span class="fa fa-user"></span> Profile</h3>
 
-					<p>
-						<strong>Employee ID</strong>: <%= Employee.empID %><br>
-						<strong>Web ID</strong>: <%= Employee.webID %><br>
-						<strong>Password</strong>: <%= Employee.password %>
-					</p>
+			</div>
+		</div>
+		<div class="col-sm-6">
+			<div class="well">
+				<h3><span class="fa fa-user"></span> Duty and Crisis Response</h3>
+
+				<a href="/duty" class="btn btn-default"><span class="fa fa-building"></span> Duty</a>
+
+			</div>
+		</div>
+		<div class="col-sm-6">
+			<div class="well">
+				<h3><span class="fa fa-user"></span> Community Mapping</h3>
+
+				<a href="/mapping" class="btn btn-default"><span class="fa fa-users"></span> Community Mapping</a>
+
+			</div>
+		</div>
+		<div class="col-sm-6">
+			<div class="well">
+				<h3><span class="fa fa-user"></span> Roommate Management</h3>
+
+				<a href="/agreement" class="btn btn-default"><span class="fa fa-chess"></span> Roommate Management</a>
+
+			</div>
+		</div>
+		<div class="col-sm-6">
+			<div class="well">
+				<h3><span class="fa fa-user"></span> Program Proposals</h3>
+
+				<a href="/proposal" class="btn btn-default"><span class="fa fa-paper-plane"></span> Program Proposals</a>
+
+			</div>
+		</div>
+		<div class="col-sm-6">
+			<div class="well">
+				<h3><span class="fa fa-user"></span> Student Leadership</h3>
+
+				<a href="/leadership" class="btn btn-default"><span class="fa fa-star"></span> Student Leadership</a>
 
 			</div>
 		</div>
@@ -36,9 +71,6 @@
 	</div>
 
 </div>
-	<a href="/mapping" class="btn btn-default"><span class="fa fa-user"></span> Community Mapping</a>
-    <a href="/agreement" class="btn btn-default"><span class="fa fa-user"></span> Roommate Management</a>
-    <a href="/proposal" class="btn btn-default"><span class="fa fa-user"></span> Program Proposals</a>
-    <a href="/leadership" class="btn btn-default"><span class="fa fa-user"></span> Student Leadership</a>
+	
 </body>
 </html>

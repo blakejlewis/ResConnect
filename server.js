@@ -15,8 +15,10 @@
 
 
 	require('./config/passport')(passport); // pass passport for configuration
+	
+	app.use('/public/images/', express.static('./public/images'));
 
-	app.use(favicon(__dirname + './favicon.ico'));
+	app.use(favicon(__dirname + './public/favicon.ico'));
 
 	// set up our express application
 	app.use(morgan('dev')); // log every request to the console

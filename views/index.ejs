@@ -5,20 +5,22 @@
 <head>
 	<title>ResConnect Home</title>
 	<link rel="stylesheet" href="//netdna.bootstrapcdn.com/bootstrap/3.0.2/css/bootstrap.min.css"> <!-- load bootstrap css -->
-	<link rel="stylesheet" href="//netdna.bootstrapcdn.com/font-awesome/4.0.3/css/font-awesome.min.css"> <!-- load fontawesome -->
+    <script defer src="https://use.fontawesome.com/releases/v5.0.8/js/solid.js" integrity="sha384-+Ga2s7YBbhOD6nie0DzrZpJes+b2K1xkpKxTFFcx59QmVPaSA8c7pycsNaFwUK6l" crossorigin="anonymous"></script> <!-- load fontawesome -->
+    <script defer src="https://use.fontawesome.com/releases/v5.0.8/js/fontawesome.js" integrity="sha384-7ox8Q2yzO/uWircfojVuCQOZl+ZZBg2D2J5nkpLqzH1HY0C1dHlTKIbpRz/LG23c" crossorigin="anonymous"></script>
 	<style>
-		body 		{ padding-top:80px; }
+		body 		{ padding-top:80px; background: #13274E}
 	</style>
 </head>
 <body>
     <div class="container">
         <div class="jumbotron text-center">
-            <h1><span class="fa fa-lock"></span> ResConnect Home</h1>
+            <img src="./public/images/ResConnect.png" width="60%" height="60%" alt="ResConnect Logo"/>
+            <p><span class="fa fa-lock"></span> Only approved personnel by The Ole Miss Department of Student Housing may access ResConnect.</p>
 
-            <p>Login or Register with:</p>
+            <b>Login or Register with:</b><br>
 
-            <a href="/login" class="btn btn-default"><span class="fa fa-user"></span> Login</a>
-            <a href="/signup" class="btn btn-default"><span class="fa fa-user"></span> Signup</a>
+            <a href="/login" class="btn btn-default"><span class="fa fa-sign-in-alt"></span> Login</a>
+            <a href="/signup" class="btn btn-default"><span class="fa fa-user-plus"></span> Register</a>
         </div>
     </div>
 </body>
