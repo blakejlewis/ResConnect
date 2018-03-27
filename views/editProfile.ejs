@@ -1,9 +1,9 @@
-<!-- views/duty.ejs -->
+<!-- views/editProfile.ejs -->
 <!doctype html>
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <html>
 <head>
-	<title>ResConnect Duty</title>
+	<title>ResConnect Account</title>
     <p align="center">
     <a href="/profile"><img src="./public/images/ResConnectBanner.png" width="50%" height="50%" alt="ResConnect Logo"/></a></p>
 	<link rel="stylesheet" href="//netdna.bootstrapcdn.com/bootstrap/3.0.2/css/bootstrap.min.css"> <!-- load bootstrap css -->
@@ -14,20 +14,40 @@
     </style>
 </head>
 <body>
-    <div class="container">
-        <div class="jumbotron text-center">
-            <h1>Duty and Crisis Response</h1>
-            <p>Click one of the links below to access the Community Assistant Duty Log, Student Housing Incident Reporting form, or review the Student Housing Policies</p>
+<div class="container">
 
-            <a href="https://cm.maxient.com/reportingform.php?UnivofMississippi&layout_id=2" class="btn btn-default"><span class="fa fa-tasks"></span> Duty Log</a>
-            <a href="https://cm.maxient.com/reportingform.php?UnivofMississippi&layout_id=7" class="btn btn-default"><span class="fa fa-exclamation-circle"></span> Incident Report</a>
-            <a href="https://studenthousing.olemiss.edu/policies/" class="btn btn-default"><span class="fa fa-clipboard-check"></span> Housing Policies</a>
-            <br></br><p>Need help? Call the on duty Graduate or Professional Staff at <b>(662) 832-7116</b> or <b>(662) 832-7117</b>. For relevant emergencies, call UPD at <b>(662) 915-7234</b>.</p>
-        </div>
-    </div>
-    <p align="center">
+<div class="col-sm-6 col-sm-offset-3">
+
+	<a align="center" style="text-decoration: none; color: #333333"><h1><span class="fa fa-user"></span> Update Account Information</h1><br>
+	<p>In case you would like to update your preferred name or change your password, use the following form.</p></a><br>
+
+	<!-- UPDATE FORM -->
+	<form action="/editProfile" method="post">
+		<div class="form-group">
+			<label>New Password</label>
+			<input type="password" class="form-control" name="password">
+		</div>
+		<div class="form-group">
+			<label>First Name</label>
+			<input type="text" class="form-control" name="firstName" value=<%=Employee.firstName%>>
+		</div>
+		<div class="form-group">
+			<label>Last Name</label>
+			<input type="text" class="form-control" name="lastName" value=<%=Employee.lastName%>>
+		</div>
+
+		<button type="submit" class="btn btn-warning btn-lg">Update</button>
+	</form>
+
+	<hr>
+
+</div>
+
+</div>
+<p align="center">
         <a href="/profile" class="btn btn-default btn-sm"><span class="fa fa-arrow-circle-left"></span> Back</a>
         <a href="/logout" class="btn btn-default btn-sm"><span class="fa fa-sign-out-alt"></span> Logout</a>
     </p>
+
 </body>
 </html>

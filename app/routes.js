@@ -1,5 +1,6 @@
 // app/routes.js
 var mysql = require('mysql');
+var bcrypt = require('bcrypt-nodejs');
 
 // Add the credentials to access database
 var connection = mysql.createConnection({
@@ -65,6 +66,24 @@ module.exports = function(app, passport) {
 		});
 	});
 
+	app.get('/editProfile', isLoggedIn, function(req, res) {
+		res.render('editProfile.ejs', {
+			Employee: req.user
+		});
+	});
+
+	app.post('/editProfile', isLoggedIn, function(req, res) {
+		var updateProfileMysql = {
+			password: bcrypt.hashSync(req.body.password, null, null),
+			firstName: req.body.firstName,
+			lastName: req.body.lastName
+		}
+
+		var insertQuery = ("UPDATE Employee SET password = ?, firstName = ?, lastName = ? WHERE empID = ?");
+		connection.query(insertQuery, [updateProfileMysql.password, updateProfileMysql.firstName, updateProfileMysql.lastName, req.user.empID], function(err, rows){});
+		res.redirect('/profile');
+	})
+
 	app.get('/duty', isLoggedIn, function(req, res) {
 		res.render('duty.ejs', {
 			Employee: req.user
@@ -83,6 +102,12 @@ module.exports = function(app, passport) {
 		});
 	});
 
+	app.get('/newAgreement', isLoggedIn, function(req, res) {
+		res.render('newAgreement.ejs', {
+			Employee: req.user
+		});
+	});
+
 	app.get('/proposal', isLoggedIn, function(req, res) {
 		// render the page and pass in any flash data if it exists
 		res.render('proposal.ejs', { 
@@ -93,7 +118,6 @@ module.exports = function(app, passport) {
 	// process the signup form
 	app.post('/proposal', function(req, res){
             var newProgramProposalMysql = {
-                proposal_ID: req.body.proposal_ID,
                 communityID: req.user.communityID,
                 programProposer: (req.user.firstName + " " + req.user.lastName),
                 eventName: req.body.eventName,
@@ -104,9 +128,9 @@ module.exports = function(app, passport) {
                 eventPRA: req.body.eventPRA
             };
 
-            var insertQuery = "INSERT INTO ProgramProposal ( proposal_ID, communityID, programProposer, eventName, eventDateTime, eventLocation, eventDescription, learningOutcome, eventPRA ) values (?,?,?,?,?,?,?,?,?)";
+            var insertQuery = "INSERT INTO ProgramProposal ( communityID, programProposer, eventName, eventDateTime, eventLocation, eventDescription, learningOutcome, eventPRA ) values (?,?,?,?,?,?,?,?)";
 
-            connection.query(insertQuery, [newProgramProposalMysql.proposal_ID, newProgramProposalMysql.communityID, newProgramProposalMysql.programProposer, newProgramProposalMysql.eventName, newProgramProposalMysql.eventDateTime, newProgramProposalMysql.eventLocation, newProgramProposalMysql.eventDescription, newProgramProposalMysql.learningOutcome, newProgramProposalMysql.eventPRA], function(err,rows) {});
+            connection.query(insertQuery, [newProgramProposalMysql.communityID, newProgramProposalMysql.programProposer, newProgramProposalMysql.eventName, newProgramProposalMysql.eventDateTime, newProgramProposalMysql.eventLocation, newProgramProposalMysql.eventDescription, newProgramProposalMysql.learningOutcome, newProgramProposalMysql.eventPRA], function(err,rows) {});
 		res.redirect(302, '/profile');
 	});
 
