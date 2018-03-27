@@ -1,4 +1,23 @@
 // app/routes.js
+var mysql = require('mysql');
+
+// Add the credentials to access database
+var connection = mysql.createConnection({
+    host     : 'localhost',
+    user     : 'root',
+    password : 'trixie1',
+    database : 'resconnect'
+});
+
+connection.connect(function(err) {
+    if(err){
+        console.log(err.code);
+        console.log(err.fatal);
+    }
+    else
+        console.log('Connection successful');
+});
+
 module.exports = function(app, passport) {
 
 	app.get('/', function(req, res) {
@@ -65,9 +84,30 @@ module.exports = function(app, passport) {
 	});
 
 	app.get('/proposal', isLoggedIn, function(req, res) {
-		res.render('proposal.ejs', {
+		// render the page and pass in any flash data if it exists
+		res.render('proposal.ejs', { 
 			Employee: req.user
-		});
+		 });
+	});
+
+	// process the signup form
+	app.post('/proposal', function(req, res){
+            var newProgramProposalMysql = {
+                proposal_ID: req.body.proposal_ID,
+                communityID: req.user.communityID,
+                programProposer: (req.user.firstName + " " + req.user.lastName),
+                eventName: req.body.eventName,
+                eventDateTime: req.body.eventDateTime,
+                eventLocation: req.body.eventLocation,
+                eventDescription: req.body.eventDescription,
+                learningOutcome: req.body.learningOutcome,
+                eventPRA: req.body.eventPRA
+            };
+
+            var insertQuery = "INSERT INTO ProgramProposal ( proposal_ID, communityID, programProposer, eventName, eventDateTime, eventLocation, eventDescription, learningOutcome, eventPRA ) values (?,?,?,?,?,?,?,?,?)";
+
+            connection.query(insertQuery, [newProgramProposalMysql.proposal_ID, newProgramProposalMysql.communityID, newProgramProposalMysql.programProposer, newProgramProposalMysql.eventName, newProgramProposalMysql.eventDateTime, newProgramProposalMysql.eventLocation, newProgramProposalMysql.eventDescription, newProgramProposalMysql.learningOutcome, newProgramProposalMysql.eventPRA], function(err,rows) {});
+		res.redirect(302, '/profile');
 	});
 
 	app.get('/leadership', isLoggedIn, function(req, res) {

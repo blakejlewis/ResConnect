@@ -1,1 +1,68 @@
-PROGRAM PROPOSAL PAGE
+<!-- views/proposal.ejs -->
+<!doctype html>
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<html>
+<head>
+	<title>ResConnect Program Proposal</title>
+    <p align="center">
+    <a href="/profile"><img src="./public/images/ResConnectBanner.png" width="50%" height="50%" alt="ResConnect Logo"/></a></p>
+	<link rel="stylesheet" href="//netdna.bootstrapcdn.com/bootstrap/3.0.2/css/bootstrap.min.css"> <!-- load bootstrap css -->
+    <script defer src="https://use.fontawesome.com/releases/v5.0.8/js/solid.js" integrity="sha384-+Ga2s7YBbhOD6nie0DzrZpJes+b2K1xkpKxTFFcx59QmVPaSA8c7pycsNaFwUK6l" crossorigin="anonymous"></script> <!-- load fontawesome -->
+    <script defer src="https://use.fontawesome.com/releases/v5.0.8/js/fontawesome.js" integrity="sha384-7ox8Q2yzO/uWircfojVuCQOZl+ZZBg2D2J5nkpLqzH1HY0C1dHlTKIbpRz/LG23c" crossorigin="anonymous"></script>
+    <style>
+        body        { padding-top:20px;}
+    </style>
+</head>
+<body>
+<div class="container">
+
+<div class="col-sm-6 col-sm-offset-3">
+
+	<h1><span class="fa fa-paper-plane"></span> Submit a Program Proposal</h1><br>
+	<p align="center">Your supervisor will review this proposal and contact you regarding approval.</p><br>
+
+	<!-- PROPOSAL FORM -->
+	<form action="/proposal" method="post">
+		<div class="form-group">
+			<label>Proposal ID</label>
+			<input type="number" class="form-control" name="proposal_ID">
+		</div>
+		<div class="form-group">
+			<label>Event Name</label>
+			<input type="text" class="form-control" name="eventName">
+		</div>
+		<div class="form-group">
+			<label>Event Date and Time</label>
+			<input type="datetime-local" class="form-control" name="eventDateTime">
+		</div>
+		<div class="form-group">
+			<label>Event Location</label>
+			<input type="text" class="form-control" name="eventLocation">
+		</div>
+		<div class="form-group">
+			<label>Event Description</label>
+			<input type="text" class="form-control" name="eventDescription">
+		</div>
+		<div class="form-group">
+			<label>Learning Outcome</label>
+			<input type="text" class="form-control" name="learningOutcome">
+		</div>
+		<div class="form-group">
+			<label>Event PRA</label>
+			<input type="text" class="form-control" name="eventPRA">
+		</div>
+
+		<button type="submit" class="btn btn-warning btn-lg">Submit</button>
+	</form>
+
+	<hr>
+	<p align="center">
+        <a href="/profile" class="btn btn-default btn-sm"><span class="fa fa-arrow-circle-left"></span> Back</a>
+        <a href="/logout" class="btn btn-default btn-sm"><span class="fa fa-sign-out-alt"></span> Logout</a>
+    </p>
+
+</div>
+
+</div>
+</body>
+</html>

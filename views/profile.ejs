@@ -1,22 +1,25 @@
 <!-- views/profile.ejs -->
 <!doctype html>
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
 <html>
 <head>
 	<title>ResConnect Home</title>
+	<p align="center">
+    <img src="./public/images/ResConnectBanner.png" width="50%" height="50%" alt="ResConnect Logo"/></p>
+    
+    <div class="page-header text-center">
+		<h1><span class="fa fa-university"></span> Welcome Back, <%= Employee.firstName%></h1>
+		<a href="/logout" class="btn btn-default btn-sm"><span class="fa fa-sign-out-alt"></span> Logout</a>
+	</div>
 	<link rel="stylesheet" href="//netdna.bootstrapcdn.com/bootstrap/3.0.2/css/bootstrap.min.css"> 
 	<script defer src="https://use.fontawesome.com/releases/v5.0.8/js/solid.js" integrity="sha384-+Ga2s7YBbhOD6nie0DzrZpJes+b2K1xkpKxTFFcx59QmVPaSA8c7pycsNaFwUK6l" crossorigin="anonymous"></script> <!-- load fontawesome -->
     <script defer src="https://use.fontawesome.com/releases/v5.0.8/js/fontawesome.js" integrity="sha384-7ox8Q2yzO/uWircfojVuCQOZl+ZZBg2D2J5nkpLqzH1HY0C1dHlTKIbpRz/LG23c" crossorigin="anonymous"></script>
 	<style>
-		body 		{ padding-top:80px; word-wrap:break-word; }
+		body 		{ padding-top:10px; word-wrap:break-word; }
 	</style>
 </head>
 <body>
 <div class="container">
-
-	<div class="page-header text-center">
-		<h1><span class="fa fa-university"></span> Welcome Back, <%= Employee.firstName%></h1>
-		<a href="/logout" class="btn btn-default btn-sm"><span class="fa fa-sign-out-alt"></span> Logout</a>
-	</div>
 
 	<div class="row">
 
@@ -27,50 +30,61 @@
 
 			</div>
 		</div>
-		<div class="col-sm-6">
-			<div class="well">
-				<h3><span class="fa fa-user"></span> Duty and Crisis Response</h3>
+		<a href="/duty" style="text-decoration: none; color: #333333">
+			<div class="col-sm-6">
+				<div class="well">
+					<h3><span class="fa fa-building"></span> Duty and Crisis Response</h3>
 
-				<a href="/duty" class="btn btn-default"><span class="fa fa-building"></span> Duty</a>
+					<p>Click this module to fill out a Duty Log or submit an Incident Report.</p>
 
+				</div>
 			</div>
-		</div>
-		<div class="col-sm-6">
-			<div class="well">
-				<h3><span class="fa fa-user"></span> Community Mapping</h3>
+		<a>
+		<a href="/mapping" style="text-decoration: none; color: #333333">
+			<div class="col-sm-6">
+				<div class="well">
+					<h3><span class="fa fa-users"></span> Community Mapping</h3>
 
-				<a href="/mapping" class="btn btn-default"><span class="fa fa-users"></span> Community Mapping</a>
+					<p>Click this module to create a new Community Map or view past ones.</p>
 
+				</div>
 			</div>
-		</div>
-		<div class="col-sm-6">
-			<div class="well">
-				<h3><span class="fa fa-user"></span> Roommate Management</h3>
+		<a>
+		<a href="/agreement" style="text-decoration: none; color: #333333">
+			<div class="col-sm-6">
+				<div class="well">
+					<h3><span class="fa fa-chess"></span> Roommate Management</h3>
 
-				<a href="/agreement" class="btn btn-default"><span class="fa fa-chess"></span> Roommate Management</a>
+					<p>Click this module to create a new Roommate Agreement or edit exisiting ones.</p>
 
+				</div>
 			</div>
-		</div>
-		<div class="col-sm-6">
-			<div class="well">
-				<h3><span class="fa fa-user"></span> Program Proposals</h3>
+		<a>
+		<a href="/proposal" style="text-decoration: none; color: #333333">
+			<div class="col-sm-6">
+				<div class="well">
+					<h3><span class="fa fa-paper-plane"></span> Program Proposals</h3>
 
-				<a href="/proposal" class="btn btn-default"><span class="fa fa-paper-plane"></span> Program Proposals</a>
+					<p>Click this module to submit a Program Proposal to your supervisor.</p>
 
+				</div>
 			</div>
-		</div>
-		<div class="col-sm-6">
-			<div class="well">
-				<h3><span class="fa fa-user"></span> Student Leadership</h3>
+		<a>
+		<a href="/leadership" style="text-decoration: none; color: #333333">
+			<div class="col-sm-6">
+				<div class="well">
+					<h3><span class="fa fa-star"></span> Student Leadership</h3>
 
-				<a href="/leadership" class="btn btn-default"><span class="fa fa-star"></span> Student Leadership</a>
+					<p>Click this module to view resources about our student leadership organizations.</p>
 
+				</div>
 			</div>
-		</div>
+		<a>
 
 	</div>
 
 </div>
+<p align="center" style="text-decoration: none; color: #333333"><i>For use only by approved personnel by The University of Mississippi Department of Student Housing</i></p>
 	
 </body>
 </html>
