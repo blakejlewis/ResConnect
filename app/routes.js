@@ -108,6 +108,59 @@ module.exports = function(app, passport) {
 		});
 	});
 
+	app.post('/newAgreement', function(req, res){
+		var newAgreementMysql = {
+			communityID: req.user.communityID,
+			caID: req.user.empID,
+			roomNumber: req.body.roomNumber,
+			roommate1: req.body.roommate1,
+			roommate2: req.body.roommate2,
+			stressor1: req.body.stressor1,
+			stressManagement1: req.body.stressManagement1,
+			stressHelp1: req.body.stressHelp1,
+			communicationVia1: req.body.communicationVia1,
+			stressor2: req.body.stressor2,
+			stressManagement2: req.body.stressManagement2,
+			stressHelp2: req.body.stressHelp2,
+			communicationVia2: req.body.communicationVia2,
+			studyTime: req.body.studyTime,
+			studyActivities: req.body.studyActivities,
+			studyAdjustments: req.body.studyAdjustments,
+			weekdaySleeptime: req.body.weekdaySleeptime,
+			weekendSleeptime: req.body.weekendSleeptime,
+			sleepActivities: req.body.sleepActivities,
+			cleanTasks1: req.body.cleanTasks1,
+			cleanFrequency1: req.body.cleanFrequency1,
+			cleanTasks2: req.body.cleanTasks2,
+			cleanFrequency2: req.body.cleanFrequency2,
+			belongingPermission: req.body.belongingPermission,
+			sharedElectronics: req.body.sharedElectronics,
+			sharedClothes: req.body.sharedClothes,
+			sharedFood: req.body.sharedFood,
+			sharedHousehold: req.body.sharedHousehold,
+			sharedOther: req.body.sharedOther,
+			whileAway: req.body.whileAway,
+			respectPrivacy: req.body.respectPrivacy,
+			roommate1Habits: req.body.roommate1Habits,
+			roommate1PetPeeves: req.body.roommate1PetPeeves,
+			roommate2Habits: req.body.roommate2Habits,
+			roommate2PetPeeves: req.body.roommate2PetPeeves,
+			guestPermission: req.body.guestPermission,
+			guestPrivacy: req.body.guestPrivacy,
+			whenLocked: req.body.whenLocked,
+			alcoholDrugs: req.body.alcoholDrugs,
+			temperature: req.body.temperature,
+			damage: req.body.damage,
+			roommate1Signature: req.body.roommate1Signature,
+			roommate2Signature: req.body.roommate2Signature
+		};
+
+		var insertQuery = "INSERT INTO RoommateAgreement ( communityID, caID, roomNumber, roommate1, roommate2, stressor1, stressManagement1, stressHelp1, communicationVia1, stressor2, stressManagement2, stressHelp2, communicationVia2, studyTime, studyActivities, studyAdjustments, weekdaySleeptime, weekendSleeptime, sleepActivities, cleanTasks1, cleanFrequency1, cleanTasks2, cleanFrequency2, belongingPermission, sharedElectronics, sharedClothes, sharedFood, sharedHousehold, sharedOther, whileAway, respectPrivacy, roommate1Habits, roommate1PetPeeves, roommate2Habits, roommate2PetPeeves, guestPermission, guestPrivacy, whenLocked, alcoholDrugs, temperature, damage, roommate1Signature, roommate2Signature ) values (?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?)";
+
+		connection.query(insertQuery, [newAgreementMysql.communityID, newAgreementMysql.caID, newAgreementMysql.roomNumber, newAgreementMysql.roommate1, newAgreementMysql.roommate2, newAgreementMysql.stressor1, newAgreementMysql.stressManagement1, newAgreementMysql.stressHelp1, newAgreementMysql.communicationVia1, newAgreementMysql.stressor2, newAgreementMysql.stressManagement2, newAgreementMysql.stressHelp2, newAgreementMysql.communicationVia2, newAgreementMysql.studyTime, newAgreementMysql.studyActivities, newAgreementMysql.studyAdjustments, newAgreementMysql.weekdaySleeptime, newAgreementMysql.weekendSleeptime, newAgreementMysql.sleepActivities, newAgreementMysql.cleanTasks1, newAgreementMysql.cleanFrequency1, newAgreementMysql.cleanTasks2, newAgreementMysql.cleanFrequency2, newAgreementMysql.belongingPermission, newAgreementMysql.sharedElectronics, newAgreementMysql.sharedClothes, newAgreementMysql.sharedFood, newAgreementMysql.sharedHousehold, newAgreementMysql.sharedOther, newAgreementMysql.whileAway, newAgreementMysql.respectPrivacy, newAgreementMysql.roommate1Habits, newAgreementMysql.roommate1PetPeeves, newAgreementMysql.roommate2Habits, newAgreementMysql.roommate2PetPeeves, newAgreementMysql.guestPermission, newAgreementMysql.guestPrivacy, newAgreementMysql.whenLocked, newAgreementMysql.alcoholDrugs, newAgreementMysql.temperature, newAgreementMysql.damage, newAgreementMysql.roommate1Signature, newAgreementMysql.roommate2Signature], function(err,rows) {});
+		res.redirect(302, '/agreement');	
+	});
+
 	app.get('/proposal', isLoggedIn, function(req, res) {
 		// render the page and pass in any flash data if it exists
 		res.render('proposal.ejs', { 
@@ -117,20 +170,20 @@ module.exports = function(app, passport) {
 
 	// process the signup form
 	app.post('/proposal', function(req, res){
-            var newProgramProposalMysql = {
-                communityID: req.user.communityID,
-                programProposer: (req.user.firstName + " " + req.user.lastName),
-                eventName: req.body.eventName,
-                eventDateTime: req.body.eventDateTime,
-                eventLocation: req.body.eventLocation,
-                eventDescription: req.body.eventDescription,
-                learningOutcome: req.body.learningOutcome,
-                eventPRA: req.body.eventPRA
-            };
+        var newProgramProposalMysql = {
+           	communityID: req.user.communityID,
+            programProposer: (req.user.firstName + " " + req.user.lastName),
+            eventName: req.body.eventName,
+            eventDateTime: req.body.eventDateTime,
+            eventLocation: req.body.eventLocation,
+            eventDescription: req.body.eventDescription,
+            learningOutcome: req.body.learningOutcome,
+            eventPRA: req.body.eventPRA
+        };
 
-            var insertQuery = "INSERT INTO ProgramProposal ( communityID, programProposer, eventName, eventDateTime, eventLocation, eventDescription, learningOutcome, eventPRA ) values (?,?,?,?,?,?,?,?)";
+        var insertQuery = "INSERT INTO ProgramProposal ( communityID, programProposer, eventName, eventDateTime, eventLocation, eventDescription, learningOutcome, eventPRA ) values (?,?,?,?,?,?,?,?)";
 
-            connection.query(insertQuery, [newProgramProposalMysql.communityID, newProgramProposalMysql.programProposer, newProgramProposalMysql.eventName, newProgramProposalMysql.eventDateTime, newProgramProposalMysql.eventLocation, newProgramProposalMysql.eventDescription, newProgramProposalMysql.learningOutcome, newProgramProposalMysql.eventPRA], function(err,rows) {});
+        connection.query(insertQuery, [newProgramProposalMysql.communityID, newProgramProposalMysql.programProposer, newProgramProposalMysql.eventName, newProgramProposalMysql.eventDateTime, newProgramProposalMysql.eventLocation, newProgramProposalMysql.eventDescription, newProgramProposalMysql.learningOutcome, newProgramProposalMysql.eventPRA], function(err,rows) {});
 		res.redirect(302, '/profile');
 	});
 
