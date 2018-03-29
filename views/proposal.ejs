@@ -22,31 +22,33 @@
 	<p align="center">Your supervisor will review this proposal and contact you regarding approval.</p><br>
 
 	<!-- PROPOSAL FORM -->
-	<form action="/proposal" method="post">
-		<div class="form-group">
-			<label>Event Name</label>
-			<input type="text" class="form-control" name="eventName">
-		</div>
-		<div class="form-group">
-			<label>Event Date and Time</label>
-			<input type="datetime-local" class="form-control" name="eventDateTime">
-		</div>
-		<div class="form-group">
-			<label>Event Location</label>
-			<input type="text" class="form-control" name="eventLocation">
-		</div>
-		<div class="form-group">
-			<label>Event Description</label>
-			<input type="text" class="form-control" name="eventDescription">
-		</div>
-		<div class="form-group">
-			<label>Learning Outcome</label>
-			<input type="text" class="form-control" name="learningOutcome">
-		</div>
-		<div class="form-group">
-			<label>Event PRA</label>
-			<input type="text" class="form-control" name="eventPRA">
-		</div>
+	<div class="well">
+		<form action="/proposal" method="post">
+			<div class="form-group">
+				<label>Event Name</label>
+				<input type="text" class="form-control" name="eventName">
+			</div>
+			<div class="form-group">
+				<label>Event Date and Time</label>
+				<input type="datetime-local" class="form-control" name="eventDateTime">
+			</div>
+			<div class="form-group">
+				<label>Event Location</label>
+				<input type="text" class="form-control" name="eventLocation">
+			</div>
+			<div class="form-group">
+				<label>Event Description</label>
+				<input type="text" class="form-control" name="eventDescription">
+			</div>
+			<div class="form-group">
+				<label>Learning Outcome</label>
+				<input type="text" class="form-control" name="learningOutcome">
+			</div>
+			<div class="form-group">
+				<label>Event PRA</label>
+				<input type="text" class="form-control" name="eventPRA">
+			</div>
+	</div>
 
 		<button type="submit" class="btn btn-warning btn-lg">Submit</button>
 	</form>

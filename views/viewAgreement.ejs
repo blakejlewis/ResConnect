@@ -1,0 +1,46 @@
+<!-- views/viewAgreement.ejs -->
+<!doctype html>
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<html>
+<head>
+	<title>Roommate Agreements</title>
+    <p align="center">
+    <a href="/profile"><img src="./public/images/ResConnectBanner.png" width="50%" height="50%" alt="ResConnect Logo"/></a></p>
+	<link rel="stylesheet" href="//netdna.bootstrapcdn.com/bootstrap/3.0.2/css/bootstrap.min.css"> <!-- load bootstrap css -->
+    <script defer src="https://use.fontawesome.com/releases/v5.0.8/js/solid.js" integrity="sha384-+Ga2s7YBbhOD6nie0DzrZpJes+b2K1xkpKxTFFcx59QmVPaSA8c7pycsNaFwUK6l" crossorigin="anonymous"></script> <!-- load fontawesome -->
+    <script defer src="https://use.fontawesome.com/releases/v5.0.8/js/fontawesome.js" integrity="sha384-7ox8Q2yzO/uWircfojVuCQOZl+ZZBg2D2J5nkpLqzH1HY0C1dHlTKIbpRz/LG23c" crossorigin="anonymous"></script>
+    <style>
+        body        { padding-top:20px;}
+    </style>
+</head>
+<body>
+<div class="container">
+
+<div class="col-sm-6 col-sm-offset-3">
+
+	<h1><span class="fa fa-chess"></span> View Roommate Agreements</h1><br>
+	<p align="center">Click on a Roommate Agreement below to view the full response and edit if necessary.</p><br>
+
+	<% for (var i=0; i < Agreements.length; i++) { %>
+		<a href="/editAgreement/<%= Agreements[i].agreementID %>" style="text-decoration: none; color: #333333">
+			<div class="well" align="center">
+
+				<h3>Roommate Agreement for Room #<%= Agreements[i].roomNumber%></h3>
+				<p><%= Agreements[i].roommate1%></p>
+				<p><%= Agreements[i].roommate2%></p>
+			</div>
+		</a>
+	<% } %>
+	
+	<hr>
+	<p align="center">
+        <a href="/agreement" class="btn btn-default btn-sm"><span class="fa fa-arrow-circle-left"></span> Back</a>
+        <a href="/logout" class="btn btn-default btn-sm"><span class="fa fa-sign-out-alt"></span> Logout</a>
+    </p>
+
+</div>
+
+</div>
+</body>
+</html>
+

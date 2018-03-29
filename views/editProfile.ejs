@@ -22,19 +22,21 @@
 	<p>In case you would like to update your preferred name or change your password, use the following form.</p></a><br>
 
 	<!-- UPDATE FORM -->
-	<form action="/editProfile" method="post">
-		<div class="form-group">
-			<label>New Password</label>
-			<input type="password" class="form-control" name="password">
-		</div>
-		<div class="form-group">
-			<label>First Name</label>
-			<input type="text" class="form-control" name="firstName" value=<%=Employee.firstName%>>
-		</div>
-		<div class="form-group">
-			<label>Last Name</label>
-			<input type="text" class="form-control" name="lastName" value=<%=Employee.lastName%>>
-		</div>
+	<div class="well">
+		<form action="/editProfile" method="post">
+			<div class="form-group">
+				<label>New Password</label>
+				<input type="password" class="form-control" name="password">
+			</div>
+			<div class="form-group">
+				<label>First Name</label>
+				<input type="text" class="form-control" name="firstName" value=<%=Employee.firstName%>>
+			</div>
+			<div class="form-group">
+				<label>Last Name</label>
+				<input type="text" class="form-control" name="lastName" value=<%=Employee.lastName%>>
+			</div>
+	</div>
 
 		<button type="submit" class="btn btn-warning btn-lg">Update</button>
 	</form>
