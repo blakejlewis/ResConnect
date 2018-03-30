@@ -114,6 +114,7 @@ module.exports = function(app, passport) {
 		var newAgreementMysql = {
 			communityID: req.user.communityID,
 			caID: req.user.empID,
+			floorLevel: req.user.floorLevel,
 			roomNumber: req.body.roomNumber,
 			roommate1: req.body.roommate1,
 			roommate2: req.body.roommate2,
@@ -157,9 +158,9 @@ module.exports = function(app, passport) {
 			roommate2Signature: req.body.roommate2Signature
 		};
 
-		var insertQuery = "INSERT INTO RoommateAgreement ( communityID, caID, roomNumber, roommate1, roommate2, stressor1, stressManagement1, stressHelp1, communicationVia1, stressor2, stressManagement2, stressHelp2, communicationVia2, studyTime, studyActivities, studyAdjustments, weekdaySleeptime, weekendSleeptime, sleepActivities, cleanTasks1, cleanFrequency1, cleanTasks2, cleanFrequency2, belongingPermission, sharedElectronics, sharedClothes, sharedFood, sharedHousehold, sharedOther, whileAway, respectPrivacy, roommate1Habits, roommate1PetPeeves, roommate2Habits, roommate2PetPeeves, guestPermission, guestPrivacy, whenLocked, alcoholDrugs, temperature, damage, roommate1Signature, roommate2Signature ) values (?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?)";
+		var insertQuery = "INSERT INTO RoommateAgreement ( communityID, caID, floorLevel, roomNumber, roommate1, roommate2, stressor1, stressManagement1, stressHelp1, communicationVia1, stressor2, stressManagement2, stressHelp2, communicationVia2, studyTime, studyActivities, studyAdjustments, weekdaySleeptime, weekendSleeptime, sleepActivities, cleanTasks1, cleanFrequency1, cleanTasks2, cleanFrequency2, belongingPermission, sharedElectronics, sharedClothes, sharedFood, sharedHousehold, sharedOther, whileAway, respectPrivacy, roommate1Habits, roommate1PetPeeves, roommate2Habits, roommate2PetPeeves, guestPermission, guestPrivacy, whenLocked, alcoholDrugs, temperature, damage, roommate1Signature, roommate2Signature ) values (?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?)";
 
-		connection.query(insertQuery, [newAgreementMysql.communityID, newAgreementMysql.caID, newAgreementMysql.roomNumber, newAgreementMysql.roommate1, 
+		connection.query(insertQuery, [newAgreementMysql.communityID, newAgreementMysql.caID, newAgreementMysql.floorLevel, newAgreementMysql.roomNumber, newAgreementMysql.roommate1, 
 									   newAgreementMysql.roommate2, newAgreementMysql.stressor1, newAgreementMysql.stressManagement1, 
 									   newAgreementMysql.stressHelp1, newAgreementMysql.communicationVia1, newAgreementMysql.stressor2, 
 									   newAgreementMysql.stressManagement2, newAgreementMysql.stressHelp2, newAgreementMysql.communicationVia2, 
@@ -179,15 +180,33 @@ module.exports = function(app, passport) {
 	});
 
 	app.get('/viewAgreement', isLoggedIn, function(req, res) {
-		var query = "SELECT * FROM RoommateAgreement";
-		connection.query(query, function(err, rows, fields) {
+		communityID = req.user.communityID;
+		floorLevel = req.user.floorLevel;
+
+		if(req.user.permissionsType == 1) {
+
+			var query = "SELECT * FROM RoommateAgreement WHERE communityID = ? AND floorLevel = ?";
+			connection.query(query, [communityID, floorLevel], function(err, rows, fields) {
 			if (err) throw err;
 
-			res.render('viewAgreement.ejs', {
-				Employee: req.user,
-				Agreements: rows
+				res.render('viewAgreement.ejs', {
+					Employee: req.user,
+					Agreements: rows
+				});
 			});
-		});
+		}
+		else if(req.user.permissionsType == 2) {
+
+			var query = "SELECT * FROM RoommateAgreement WHERE communityID = ?";
+			connection.query(query, communityID, function(err, rows, fields) {
+				if (err) throw err;
+
+				res.render('viewAgreement.ejs', {
+					Employee: req.user,
+					Agreements: rows
+				});
+			});
+		}
 	});
 
 	app.get('/editAgreement/:id', isLoggedIn, function(req, res) {
@@ -208,6 +227,7 @@ module.exports = function(app, passport) {
 		var updateAgreementMysql = {
 			communityID: req.user.communityID,
 			caID: req.user.empID,
+			floorLevel: req.user.floorLevel,
 			roomNumber: req.body.roomNumber,
 			roommate1: req.body.roommate1,
 			roommate2: req.body.roommate2,
@@ -251,8 +271,8 @@ module.exports = function(app, passport) {
 			roommate2Signature: req.body.roommate2Signature
 		};
 
-		var updateQuery = ("UPDATE RoommateAgreement SET communityID = ?, caID = ?, roomNumber = ?, roommate1 = ?, roommate2 = ?, stressor1 = ?, stressManagement1 = ?, stressHelp1 = ?, communicationVia1 = ?, stressor2 = ?, stressManagement2 = ?, stressHelp2 = ?, communicationVia2 = ?, studyTime = ?, studyActivities = ?, studyAdjustments = ?, weekdaySleeptime = ?, weekendSleeptime = ?, sleepActivities = ?, cleanTasks1 = ?, cleanFrequency1 = ?, cleanTasks2 = ?, cleanFrequency2 = ?, belongingPermission = ?, sharedElectronics = ?, sharedClothes = ?, sharedFood = ?, sharedHousehold = ?, sharedOther = ?, whileAway = ?, respectPrivacy = ?, roommate1Habits = ?, roommate1PetPeeves = ?, roommate2Habits = ?, roommate2PetPeeves = ?, guestPermission = ?, guestPrivacy = ?, whenLocked = ?, alcoholDrugs = ?, temperature = ?, damage = ?, roommate1Signature = ?, roommate2Signature = ? WHERE agreementID = ?");
-		connection.query(updateQuery, [updateAgreementMysql.communityID, updateAgreementMysql.caID, updateAgreementMysql.roomNumber, updateAgreementMysql.roommate1, 
+		var updateQuery = ("UPDATE RoommateAgreement SET communityID = ?, caID = ?, floorLevel = ?, roomNumber = ?, roommate1 = ?, roommate2 = ?, stressor1 = ?, stressManagement1 = ?, stressHelp1 = ?, communicationVia1 = ?, stressor2 = ?, stressManagement2 = ?, stressHelp2 = ?, communicationVia2 = ?, studyTime = ?, studyActivities = ?, studyAdjustments = ?, weekdaySleeptime = ?, weekendSleeptime = ?, sleepActivities = ?, cleanTasks1 = ?, cleanFrequency1 = ?, cleanTasks2 = ?, cleanFrequency2 = ?, belongingPermission = ?, sharedElectronics = ?, sharedClothes = ?, sharedFood = ?, sharedHousehold = ?, sharedOther = ?, whileAway = ?, respectPrivacy = ?, roommate1Habits = ?, roommate1PetPeeves = ?, roommate2Habits = ?, roommate2PetPeeves = ?, guestPermission = ?, guestPrivacy = ?, whenLocked = ?, alcoholDrugs = ?, temperature = ?, damage = ?, roommate1Signature = ?, roommate2Signature = ? WHERE agreementID = ?");
+		connection.query(updateQuery, [updateAgreementMysql.communityID, updateAgreementMysql.caID, updateAgreementMysql.floorLevel, updateAgreementMysql.roomNumber, updateAgreementMysql.roommate1, 
 									   updateAgreementMysql.roommate2, updateAgreementMysql.stressor1, updateAgreementMysql.stressManagement1, 
 									   updateAgreementMysql.stressHelp1, updateAgreementMysql.communicationVia1, updateAgreementMysql.stressor2, 
 									   updateAgreementMysql.stressManagement2, updateAgreementMysql.stressHelp2, updateAgreementMysql.communicationVia2, 
@@ -282,14 +302,30 @@ module.exports = function(app, passport) {
 
 
 	app.get('/proposal', isLoggedIn, function(req, res) {
-		// render the page and pass in any flash data if it exists
-		res.render('proposal.ejs', { 
-			Employee: req.user
-		 });
+		if(req.user.permissionsType == 1) {
+			res.render('newProposal.ejs', { 
+				Employee: req.user
+		 	});
+		}
+		else if(req.user.permissionsType == 2){
+
+			CommunityID = req.user.communityID;
+
+			var query = "SELECT * FROM ProgramProposal WHERE communityID = ?";
+			connection.query(query, CommunityID, function(err, rows, fields) {
+				if (err) throw err;
+
+				res.render('viewProposal.ejs', {
+					Employee: req.user,
+					Proposals: rows
+				});
+			});
+			
+		}
 	});
 
 	// process the signup form
-	app.post('/proposal', function(req, res){
+	app.post('/newProposal', function(req, res){
         var newProgramProposalMysql = {
            	communityID: req.user.communityID,
             programProposer: (req.user.firstName + " " + req.user.lastName),
@@ -304,8 +340,31 @@ module.exports = function(app, passport) {
         var insertQuery = "INSERT INTO ProgramProposal ( communityID, programProposer, eventName, eventDateTime, eventLocation, eventDescription, learningOutcome, eventPRA ) values (?,?,?,?,?,?,?,?)";
 
         connection.query(insertQuery, [newProgramProposalMysql.communityID, newProgramProposalMysql.programProposer, newProgramProposalMysql.eventName, newProgramProposalMysql.eventDateTime, newProgramProposalMysql.eventLocation, newProgramProposalMysql.eventDescription, newProgramProposalMysql.learningOutcome, newProgramProposalMysql.eventPRA], function(err,rows) {});
-		res.redirect(302, '/profile');
+		res.redirect(302, '/proposal');
 	});
+
+	app.get('/editProposal/:id', isLoggedIn, function(req, res) {
+		let proposal_ID = req.params.id;
+		var query = ("SELECT * FROM ProgramProposal WHERE proposal_ID = ?");
+		connection.query(query, proposal_ID, function(err, rows, fields){
+			if (err) throw err;
+
+			res.render('editProposal.ejs', {
+				Employee: req.user,
+				Proposal: rows
+			});
+		});
+	});
+
+	app.post('/deleteProposal/:id', isLoggedIn, function(req, res) {
+		var proposal_ID = req.params.id;
+		var deleteQuery = ("DELETE FROM ProgramProposal WHERE proposal_ID = ?");
+		connection.query(deleteQuery, proposal_ID, function(err, rows) {
+			if(err) throw err;
+			res.redirect(302, '/proposal');
+		});
+	});
+
 
 	app.get('/leadership', isLoggedIn, function(req, res) {
 		res.render('leadership.ejs', {

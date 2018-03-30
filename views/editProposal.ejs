@@ -1,0 +1,67 @@
+<!-- views/editProposal.ejs -->
+<!doctype html>
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<html>
+<head>
+	<title>Program Proposal</title>
+    <p align="center">
+    <a href="/profile"><img src="./public/images/ResConnectBanner.png" width="50%" height="50%" alt="ResConnect Logo"/></a></p>
+	<link rel="stylesheet" href="//netdna.bootstrapcdn.com/bootstrap/3.0.2/css/bootstrap.min.css"> <!-- load bootstrap css -->
+    <script defer src="https://use.fontawesome.com/releases/v5.0.8/js/solid.js" integrity="sha384-+Ga2s7YBbhOD6nie0DzrZpJes+b2K1xkpKxTFFcx59QmVPaSA8c7pycsNaFwUK6l" crossorigin="anonymous"></script> <!-- load fontawesome -->
+    <script defer src="https://use.fontawesome.com/releases/v5.0.8/js/fontawesome.js" integrity="sha384-7ox8Q2yzO/uWircfojVuCQOZl+ZZBg2D2J5nkpLqzH1HY0C1dHlTKIbpRz/LG23c" crossorigin="anonymous"></script>
+    <style>
+        body        { padding-top:20px;}
+    </style>
+</head>
+<body>
+<div class="container">
+
+<div class="col-sm-6 col-sm-offset-3">
+
+	<a align="center" style="text-decoration: none; color: #333333"><h1><span class="fa fa-user"></span> View Program Proposal</h1><br>
+	<p>Review the following Program Proposal from your staff. Contact the Event Contact regarding approval or denial, and delete this Program Proposal if you wish.</p></a><br>
+
+	<!-- FORM -->
+	<div class="well">
+		<form action="/deleteProposal/<%= Proposal[0].proposal_ID %>" method="post">
+			<div class="form-group">
+				<label>Event Name</label>
+				<input type="text" class="form-control" name="eventName" value="<%= Proposal[0].eventName%>">
+			</div>
+			<div class="form-group">
+				<label>Event Date and Time</label>
+				<input type="datetime-local" class="form-control" name="eventDateTime" value="<%=Proposal[0].eventDateTime%>">
+			</div>
+			<div class="form-group">
+				<label>Event Location</label>
+				<input type="text" class="form-control" name="eventLocation" value="<%= Proposal[0].eventLocation%>">
+			</div>
+			<div class="form-group">
+				<label>Event Description</label>
+				<input type="text" class="form-control" name="eventDescription" value="<%= Proposal[0].eventDescription%>">
+			</div>
+			<div class="form-group">
+				<label>Learning Outcome</label>
+				<input type="text" class="form-control" name="learningOutcome" value="<%= Proposal[0].learningOutcome%>">
+			</div>
+			<div class="form-group">
+				<label>Event PRA</label>
+				<input type="text" class="form-control" name="eventPRA" value="<%= Proposal[0].eventPRA%>">
+			</div>
+	</div>
+
+		<button type="submit" class="btn btn-warning btn-lg">Delete</button>
+	</form>
+
+	<hr>
+
+</div>
+
+</div>
+<p align="center">
+        <a href="/proposal" class="btn btn-default btn-sm"><span class="fa fa-arrow-circle-left"></span> Back</a>
+        <a href="/logout" class="btn btn-default btn-sm"><span class="fa fa-sign-out-alt"></span> Logout</a>
+    </p>
+
+</body>
+</html>
