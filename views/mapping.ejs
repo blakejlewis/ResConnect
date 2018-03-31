@@ -1,1 +1,55 @@
-COMMUNITY MAPPING PAGE
+<!-- views/mapping.ejs -->
+<!doctype html>
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<html>
+<head>
+	<title>Community Mapping</title>
+	<p align="center">
+    <a href="/profile"><img src="./public/images/ResConnectBanner.png" width="50%" height="50%" alt="ResConnect Logo"/></a></p>
+	<link rel="stylesheet" href="//netdna.bootstrapcdn.com/bootstrap/3.0.2/css/bootstrap.min.css"> 
+	<script defer src="https://use.fontawesome.com/releases/v5.0.8/js/solid.js" integrity="sha384-+Ga2s7YBbhOD6nie0DzrZpJes+b2K1xkpKxTFFcx59QmVPaSA8c7pycsNaFwUK6l" crossorigin="anonymous"></script> <!-- load fontawesome -->
+    <script defer src="https://use.fontawesome.com/releases/v5.0.8/js/fontawesome.js" integrity="sha384-7ox8Q2yzO/uWircfojVuCQOZl+ZZBg2D2J5nkpLqzH1HY0C1dHlTKIbpRz/LG23c" crossorigin="anonymous"></script>
+	<style>
+		body 		{ padding-top:20px; word-wrap:break-word; }
+	</style>
+</head>
+<body>
+<div class="container">
+
+	<h1><p align="center"><span class="fa fa-users"></span> Community Mapping</p></h1><br>
+	<p align="center">Click one of the modules below to create a new Community Map or view an exisiting one.</p><br>
+
+	<div class="row">
+
+		<!-- LOCAL INFORMATION -->
+		<a href="/newMapping" style="text-decoration: none; color: #333333">
+			<div class="col-sm-6">
+				<div class="well">
+					<h3><span class="fa fa-sitemap"></span> New Community Map </h3>
+
+					<p>Create a new Community Map.</p>
+
+				</div>
+			</div>
+		<a>
+		<a href="/viewMapping" style="text-decoration: none; color: #333333">
+			<div class="col-sm-6">
+				<div class="well">
+					<h3><span class="fa fa-map"></span> View Community Map</h3>
+
+					<p>View an exisiting Community Map</p>
+
+				</div>
+			</div>
+		<a>
+
+	</div>
+
+</div>
+<p align="center">
+        <a href="/profile" class="btn btn-default btn-sm"><span class="fa fa-arrow-circle-left"></span> Back</a>
+        <a href="/logout" class="btn btn-default btn-sm"><span class="fa fa-sign-out-alt"></span> Logout</a>
+    </p>
+	
+</body>
+</html>
