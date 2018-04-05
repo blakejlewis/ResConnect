@@ -1,0 +1,87 @@
+<!-- views/addMapRoom.ejs -->
+<!doctype html>
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<html>
+<head>
+	<title>Add Map Information</title>
+    <p align="center">
+    <a href="/profile"><img src="./public/images/ResConnectBanner.png" width="50%" height="50%" alt="ResConnect Logo"/></a></p>
+	<link rel="stylesheet" href="//netdna.bootstrapcdn.com/bootstrap/3.0.2/css/bootstrap.min.css"> <!-- load bootstrap css -->
+    <script defer src="https://use.fontawesome.com/releases/v5.0.8/js/solid.js" integrity="sha384-+Ga2s7YBbhOD6nie0DzrZpJes+b2K1xkpKxTFFcx59QmVPaSA8c7pycsNaFwUK6l" crossorigin="anonymous"></script> <!-- load fontawesome -->
+    <script defer src="https://use.fontawesome.com/releases/v5.0.8/js/fontawesome.js" integrity="sha384-7ox8Q2yzO/uWircfojVuCQOZl+ZZBg2D2J5nkpLqzH1HY0C1dHlTKIbpRz/LG23c" crossorigin="anonymous"></script>
+    <style>
+        body        { padding-top:20px;}
+    </style>
+</head>
+<body>
+<div class="container">
+
+<div class="col-sm-6 col-sm-offset-3">
+
+	<h1 align="center"><span class="fa fa-users"></span> Add Room Info to Map</h1><br>
+	<p align="center">Every room with a resident in it should have the following information added to a Community Map.</p><br>
+
+	<!-- PROPOSAL FORM -->
+	<div class="well">
+		<form action="/addMapRoom/<%= communityMap[0].mapID %>/<%= mapRoom %>" method="post">
+			<div class="form-group">
+				<label>Room Number</label>
+				<input type="number" class="form-control" name="roomNumber">
+			</div>
+			<div class="form-group">
+				<label>Resident 1</label>
+				<input type="text" class="form-control" name="resident1">
+			</div>
+			<div class="form-group">
+				<label>Resident 2</label>
+				<input type="text" class="form-control" name="resident2">
+			</div>
+			<div class="form-group">
+				<label>Room standing in community:</label><br>
+				<select name="roomColorID">
+					<option value='g'>Good Standing - Green</option>
+					<option value='y'>Okay Standing - Yellow</option>
+					<option value='r'>Bad Standing - Red</option>
+				</select>
+			</div>
+			<div class="form-group">
+				<label>Are there any potential student leaders in this room?</label><br>
+				<select name="leaderInRoom">
+					<option value=1>Yes</option>
+					<option value=0>No</option>
+				</select>
+			</div>
+			<div class="form-group">
+				<label>Do you tend to visit this room often?</label><br>
+				<select name="visitMost">
+					<option value=1>Yes</option>
+					<option value=0>No</option>
+				</select>
+			</div>
+			<div class="form-group">
+				<label>Are there residents in this room that you do not see often?</label><br>
+				<select name="notSeen">
+					<option value=1>Yes</option>
+					<option value=0>No</option>
+				</select>
+			</div>
+			<div class="form-group">
+				<label>Please indicate the rooms this room connects with often as well as at least one new fact and interaction with each resident of this room.</label>
+				<input type="text" class="form-control" name="factsAndInteractions">
+			</div>
+	</div>
+
+		<button type="submit" class="btn btn-warning btn-lg">Submit</button>
+	</form>
+
+	<hr>
+	<p align="center">
+        <a href="/viewMap/<%= communityMap[0].mapID %>" class="btn btn-default btn-sm"><span class="fa fa-arrow-circle-left"></span> Back</a>
+        <a href="/logout" class="btn btn-default btn-sm"><span class="fa fa-sign-out-alt"></span> Logout</a>
+    </p>
+
+</div>
+
+</div>
+</body>
+</html>

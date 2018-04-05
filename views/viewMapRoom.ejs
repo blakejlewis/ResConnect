@@ -1,0 +1,88 @@
+<!-- views/viewMapRoom.ejs -->
+<!doctype html>
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<html>
+<head>
+	<title>Add Map Information</title>
+    <p align="center">
+    <a href="/profile"><img src="./public/images/ResConnectBanner.png" width="50%" height="50%" alt="ResConnect Logo"/></a></p>
+	<link rel="stylesheet" href="//netdna.bootstrapcdn.com/bootstrap/3.0.2/css/bootstrap.min.css"> <!-- load bootstrap css -->
+    <script defer src="https://use.fontawesome.com/releases/v5.0.8/js/solid.js" integrity="sha384-+Ga2s7YBbhOD6nie0DzrZpJes+b2K1xkpKxTFFcx59QmVPaSA8c7pycsNaFwUK6l" crossorigin="anonymous"></script> <!-- load fontawesome -->
+    <script defer src="https://use.fontawesome.com/releases/v5.0.8/js/fontawesome.js" integrity="sha384-7ox8Q2yzO/uWircfojVuCQOZl+ZZBg2D2J5nkpLqzH1HY0C1dHlTKIbpRz/LG23c" crossorigin="anonymous"></script>
+    <style>
+        body        { padding-top:20px;}
+
+    	<% if (communityMapData[0].roomColorID == 'g') { %> 
+			.well{
+      			background-color: #C0D890;
+      			padding:1em;
+    		}
+		<% } %>
+
+		<% if (communityMapData[0].roomColorID == 'y') { %> 
+			.well{
+      			background-color: #FFFFD5;
+      			padding:1em;
+    		}
+		<% } %>
+
+		<% if (communityMapData[0].roomColorID == 'r') { %> 
+			.well{
+      			background-color: #FFCCCC;
+      			padding:1em;
+    		}
+		<% } %>
+
+		<% if (communityMapData[0].leaderInRoom == 1) { %> 
+			.well{
+      			border-color: #8A2BE2;
+      			border-width: 5px;
+    		}
+		<% } %>
+
+    </style>
+</head>
+<body>
+<div class="container">
+
+<div class="col-sm-6 col-sm-offset-3">
+
+	<h1 align="center"><span class="fa fa-users"></span> Mapping Room Information</h1><br>
+	<p align="center">Review the following information about the room for the Community Map. For reference this is the meaning of the colors and symbols that may be included in the information below.<br><br>
+
+	<b>Green Background: </b>Good standing in the community<br>
+	<b>Yellow Background: </b>Okay standing in the community<br>
+	<b>Red Background: </b>Bad standing in the community<br>
+	<b>Purple Outline: </b>Denotes potential student leader(s)<br>
+	<span class="fa fa-star"></span> - Denotes a room that the CA visits often<br>
+	<span class="fa fa-question-circle"></span> - Denotes resident(s) that aren't seen very often<br>
+	</p><br>
+
+	<!-- PROPOSAL FORM -->
+	<div class="well">
+		<h3 align="center">Information for Room #<%=communityMapData[0].roomNumber%>
+			
+			<% if (communityMapData[0].visitMost == 1) { %> 
+				<span class="fa fa-star"></span>
+			<% } %>
+			<% if (communityMapData[0].notSeen == 1) { %> 
+				<span class="fa fa-question-circle"></span>
+			<% } %>
+
+		</h3>
+		<br>
+		<p><b>Residents: </b> <%=communityMapData[0].resident1%>, <%=communityMapData[0].resident2%></p>
+		<p><b>Room Connections, Facts, and Interactions: </b><br><%=communityMapData[0].factsAndInteractions%></p>
+	</div>
+
+	<hr>
+	<p align="center">
+        <a href="/viewMap/<%= communityMap[0].mapID %>" class="btn btn-default btn-sm"><span class="fa fa-arrow-circle-left"></span> Back</a>
+        <a href="/logout" class="btn btn-default btn-sm"><span class="fa fa-sign-out-alt"></span> Logout</a>
+    </p>
+
+</div>
+
+</div>
+</body>
+</html>

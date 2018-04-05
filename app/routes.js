@@ -98,6 +98,143 @@ module.exports = function(app, passport) {
 		});
 	});
 
+	app.get('/newMapping', isLoggedIn, function(req, res) {
+		res.render('newMapping.ejs', {
+			Employee: req.user
+		});
+	});
+
+	app.post('/newMapping', function(req, res){
+        var newMapMysql = {
+           	caID: req.user.empID,
+            mapDate: req.body.mapDate,
+            floorLevel: req.user.floorLevel,
+            communityID: req.user.communityID
+        };
+
+        var insertQuery = "INSERT INTO CommunityMap ( caID, mapDate, floorLevel, communityID ) values (?,?,?,?)";
+
+        connection.query(insertQuery, [newMapMysql.caID, newMapMysql.mapDate, newMapMysql.floorLevel, newMapMysql.communityID], function(err,rows) {});
+
+		var query = "SELECT * FROM CommunityMap WHERE mapDate = ? AND caID = ?";
+		connection.query(query, [newMapMysql.mapDate, newMapMysql.caID], function(err, rows, fields) {
+			if (err) throw err;
+
+			res.render('mapLayout.ejs', {
+				Employee: req.user,
+				communityMap: rows
+			});
+		});
+	});
+
+	app.get('/viewMapping', isLoggedIn, function(req, res) {
+		communityID = req.user.communityID;
+		floorLevel = req.user.floorLevel;
+
+		if(req.user.permissionsType == 1) {
+
+			var query = "SELECT * FROM CommunityMap WHERE communityID = ? AND floorLevel = ?";
+			connection.query(query, [communityID, floorLevel], function(err, rows, fields) {
+			if (err) throw err;
+
+				res.render('viewMapping.ejs', {
+					Employee: req.user,
+					Maps: rows
+				});
+			});
+		}
+		else if(req.user.permissionsType == 2) {
+
+			var query = "SELECT * FROM CommunityMap WHERE communityID = ?";
+			connection.query(query, communityID, function(err, rows, fields) {
+				if (err) throw err;
+
+				res.render('viewMapping.ejs', {
+					Employee: req.user,
+					Maps: rows
+				});
+			});
+		}
+	});
+
+	app.get('/viewMap/:id', isLoggedIn, function(req, res){
+		let mapID = req.params.id;
+
+		var query = ("SELECT * FROM CommunityMap WHERE mapID = ?");
+		connection.query(query, mapID, function(err, rows, fields){
+			if (err) throw err;
+
+			res.render('mapLayout.ejs', {
+				Employee: req.user,
+				communityMap: rows
+			});
+		});
+
+	});
+
+	app.get('/addMapRoom/:mapID/:mapRoom', isLoggedIn, function(req, res) {
+		let mapID = req.params.mapID;
+		let mapRoom = req.params.mapRoom;
+
+		var query1 = ("SELECT * FROM CommunityMapData WHERE mapID = ? AND mapRoom = ?");
+		connection.query(query1, [mapID, mapRoom], function(err, rows, fields){
+			var rows1 = rows;
+			
+			if (rows == 0){
+				var query2 = ("SELECT * FROM CommunityMap WHERE mapID = ?");
+				connection.query(query2, mapID, function(err, rows, fields){
+					if (err) throw err;
+					var rows2 = rows;
+
+					res.render('addMapRoom.ejs', {
+						Employee: req.user,
+						mapRoom: mapRoom,
+						communityMap: rows2
+					});
+				});
+
+			}
+			else {
+				var query2 = ("SELECT * FROM CommunityMap WHERE mapID = ?");
+				connection.query(query2, mapID, function(err, rows, fields){
+				if(err) throw err;
+				var rows2 = rows;
+
+					res.render('viewMapRoom.ejs', {
+						Employee: req.user,
+						mapRoom: mapRoom,
+						communityMapData: rows1,
+						communityMap: rows2
+					});
+				});
+			}
+		});
+	});
+
+	app.post('/addMapRoom/:mapID/:mapRoom', function(req, res) {
+		let mapID = req.params.mapID;
+		let mapRoom = req.params.mapRoom;
+
+		var newMapRoomMysql = {
+           	roomNumber: req.body.roomNumber,
+            resident1: req.body.resident1,
+            resident2: req.body.resident2,
+            roomColorID: req.body.roomColorID,
+            leaderInRoom: req.body.leaderInRoom,
+            visitMost: req.body.visitMost,
+            notSeen: req.body.notSeen,
+            factsAndInteractions: req.body.factsAndInteractions
+        };
+
+        var insertQuery = "INSERT INTO CommunityMapData ( roomNumber, mapID, mapRoom, resident1, resident2, roomColorID, leaderInRoom, visitMost, notSeen, factsAndInteractions ) values (?,?,?,?,?,?,?,?,?,?)";
+
+        connection.query(insertQuery, [newMapRoomMysql.roomNumber, mapID, mapRoom, newMapRoomMysql.resident1, newMapRoomMysql.resident2, newMapRoomMysql.roomColorID, newMapRoomMysql.leaderInRoom, newMapRoomMysql.visitMost, newMapRoomMysql.notSeen, newMapRoomMysql.factsAndInteractions], function(err,rows) {
+        	if(err) throw err;
+
+        	res.redirect(302, '/viewMap/' + mapID);
+        });
+	});
+
 	app.get('/agreement', isLoggedIn, function(req, res) {
 		res.render('agreement.ejs', {
 			Employee: req.user

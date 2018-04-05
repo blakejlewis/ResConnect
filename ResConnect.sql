@@ -30,18 +30,15 @@ CREATE TABLE CommunityMap (
 CREATE TABLE CommunityMapData (
     roomNumber int NOT NULL,
     mapID int NOT NULL,
+    mapRoom varchar(100) NOT NULL,
     resident1 varchar(100) NOT NULL,
     resident2 varchar(100) NOT NULL,
-    resident3 varchar(100) NULL,
-    resident4 varchar(100) NULL,
     roomColorID char(1) NOT NULL,
     leaderInRoom bool NOT NULL,
     visitMost bool NOT NULL,
     notSeen bool NOT NULL,
-    roomConnectedWith int NULL,
-    roomConnectedWith2 int NULL,
     factsAndInteractions varchar(100) NOT NULL,
-    CONSTRAINT CommunityMapData_pk PRIMARY KEY (roomNumber)
+    CONSTRAINT CommunityMapData_pk PRIMARY KEY (roomNumber, mapID)
 );
 
 -- Table: Employee

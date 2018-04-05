@@ -1,0 +1,44 @@
+<!-- views/viewMapping.ejs -->
+<!doctype html>
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<html>
+<head>
+	<title>Community Maps</title>
+    <p align="center">
+    <a href="/profile"><img src="./public/images/ResConnectBanner.png" width="50%" height="50%" alt="ResConnect Logo"/></a></p>
+	<link rel="stylesheet" href="//netdna.bootstrapcdn.com/bootstrap/3.0.2/css/bootstrap.min.css"> <!-- load bootstrap css -->
+    <script defer src="https://use.fontawesome.com/releases/v5.0.8/js/solid.js" integrity="sha384-+Ga2s7YBbhOD6nie0DzrZpJes+b2K1xkpKxTFFcx59QmVPaSA8c7pycsNaFwUK6l" crossorigin="anonymous"></script> <!-- load fontawesome -->
+    <script defer src="https://use.fontawesome.com/releases/v5.0.8/js/fontawesome.js" integrity="sha384-7ox8Q2yzO/uWircfojVuCQOZl+ZZBg2D2J5nkpLqzH1HY0C1dHlTKIbpRz/LG23c" crossorigin="anonymous"></script>
+    <style>
+        body        { padding-top:20px;}
+    </style>
+</head>
+<body>
+<div class="container">
+
+<div class="col-sm-6 col-sm-offset-3">
+
+	<h1 align = "center"><span class="fa fa-map"></span> View Community Maps</h1><br>
+	<p align="center">Click on a Community Map below to view the full map.</p><br>
+
+	<% for (var i=0; i < Maps.length; i++) { %>
+		<a href="/viewMap/<%= Maps[i].mapID %>" style="text-decoration: none; color: #333333">
+			<div class="well" align="center">
+
+				<h3>Community Map for <%= Maps[i].floorLevel%>th Floor</h3>
+				<p>Week of <%= Maps[i].mapDate%></p>
+			</div>
+		</a>
+	<% } %>
+	
+	<hr>
+	<p align="center">
+        <a href="/mapping" class="btn btn-default btn-sm"><span class="fa fa-arrow-circle-left"></span> Back</a>
+        <a href="/logout" class="btn btn-default btn-sm"><span class="fa fa-sign-out-alt"></span> Logout</a>
+    </p>
+
+</div>
+
+</div>
+</body>
+</html>
