@@ -172,6 +172,22 @@ module.exports = function(app, passport) {
 
 	});
 
+	app.post('/deleteMapping/:id', isLoggedIn, function(req, res) {
+		var mapID = req.params.id;
+
+		var deleteQueryMapInfo = ("DELETE FROM CommunityMapData WHERE mapID = ?");
+		connection.query(deleteQueryMapInfo, mapID, function(err, rows) {
+			if(err) throw err;
+		});
+
+		var deleteQueryMap = ("DELETE FROM CommunityMap WHERE mapID = ?");
+		connection.query(deleteQueryMap, mapID, function(err, rows) {
+			if(err) throw err;
+			
+			res.redirect(302, '/mapping');
+		});
+	});
+
 	app.get('/addMapRoom/:mapID/:mapRoom', isLoggedIn, function(req, res) {
 		let mapID = req.params.mapID;
 		let mapRoom = req.params.mapRoom;
@@ -179,7 +195,7 @@ module.exports = function(app, passport) {
 		var query1 = ("SELECT * FROM CommunityMapData WHERE mapID = ? AND mapRoom = ?");
 		connection.query(query1, [mapID, mapRoom], function(err, rows, fields){
 			var rows1 = rows;
-			
+
 			if (rows == 0){
 				var query2 = ("SELECT * FROM CommunityMap WHERE mapID = ?");
 				connection.query(query2, mapID, function(err, rows, fields){

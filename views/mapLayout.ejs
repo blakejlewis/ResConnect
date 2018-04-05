@@ -10,9 +10,13 @@
     <script defer src="https://use.fontawesome.com/releases/v5.0.8/js/solid.js" integrity="sha384-+Ga2s7YBbhOD6nie0DzrZpJes+b2K1xkpKxTFFcx59QmVPaSA8c7pycsNaFwUK6l" crossorigin="anonymous"></script> <!-- load fontawesome -->
     <script defer src="https://use.fontawesome.com/releases/v5.0.8/js/fontawesome.js" integrity="sha384-7ox8Q2yzO/uWircfojVuCQOZl+ZZBg2D2J5nkpLqzH1HY0C1dHlTKIbpRz/LG23c" crossorigin="anonymous"></script>
     <style>
-        body        { padding-top:20px;}
+      body { 
+        padding-top:20px;
+        position: relative;
+        text-align: center;
+      }
 
-    	.wrapper{
+    	.wrapper1{
       		display:grid;
       		grid-template-columns: 10% 10% 10% 10% 10% 10% 10% 10% 10% 10%;
       		/*
@@ -22,13 +26,32 @@
       		grid-gap:1em;
     	}
 
-    	.wrapper > div{
+      .wrapper2{
+          display:grid;
+          grid-template-columns: 10.5% 10.5% 10.5% 10.5% 10.5% 10.5% 10.5% 10.5%;
+          /*
+          grid-column-gap:1em;
+          grid-row-gap:1em;
+          */
+          grid-gap:1em;
+      }
+
+    	.wrapper1 > div{
       		background:#eee;
       		padding:1em;
     	}
-    	.wrapper > div:nth-child(odd){
+    	.wrapper1 > div:nth-child(odd){
       		background:#ddd;
     	}
+
+      .wrapper2 > div{
+          background:#eee;
+          padding:1em;
+          padding-left: 12px;
+      }
+      .wrapper2 > div:nth-child(odd){
+          background:#ddd;
+      }
 
   </style>
 </head>
@@ -36,69 +59,194 @@
 <div class="container">
 
 	<h1 align="center"><span class="fa fa-sitemap"></span> Community Map - Week of <%=communityMap[0].mapDate%></h1><br>
-	<p align="center">The boxes below each represent a room on your floor. Click a box to fill in the information for each room.</p><br>
+	<p align="center">Click a box to fill in the info for each room. Generated templates are approximate, and you may not use all rooms on your Community Map. If a room is empty, or the map is too big, simply do not fill in those rooms. Maps are generated to over-estimate layouts, so a map should never be too small. Fill in the map the way that makes the most sense to you.</p>
+  <p align="center"><b>For best results, please only use the Community Mapping module on a desktop computer.</b></p><br>
 
-<div class="wrapper">
-    <div class="room1">
-      <a href="/addMapRoom/<%= communityMap[0].mapID %>/room1" style="text-decoration: none; color: #333333">Room</a>
-    </div>
-    <div class="room2">
-      <a href="/addMapRoom/<%= communityMap[0].mapID %>/room2" style="text-decoration: none; color: #333333">Room</a>
-    </div>
-    <div class="room3">
-      <a href="/addMapRoom/<%= communityMap[0].mapID %>/room3" style="text-decoration: none; color: #333333">Room</a>
-    </div>
-    <div class="room4">
-      <a href="/addMapRoom/<%= communityMap[0].mapID %>/room4" style="text-decoration: none; color: #333333">Room</a>
-    </div>
-    <div class="room5">
-      <a href="/addMapRoom/<%= communityMap[0].mapID %>/room5" style="text-decoration: none; color: #333333">Room</a>
-    </div>
-    <div class="room6">
-      <a href="/addMapRoom/<%= communityMap[0].mapID %>/room6" style="text-decoration: none; color: #333333">Room</a>
-    </div>
-	  <div class="room7">
-      <a href="/addMapRoom/<%= communityMap[0].mapID %>/room7" style="text-decoration: none; color: #333333">Room</a>
-    </div>
-    <div class="room8">
-      <a href="/addMapRoom/<%= communityMap[0].mapID %>/room8" style="text-decoration: none; color: #333333">Room</a>
-    </div>
-    <div class="room9">
-      <a href="/addMapRoom/<%= communityMap[0].mapID %>/room9" style="text-decoration: none; color: #333333">Room</a>
-    </div>
-  </div>
-  <br>
-  <div class="wrapper">
-    <div class="room10">
-      <a href="/addMapRoom/<%= communityMap[0].mapID %>/room10" style="text-decoration: none; color: #333333">Room</a>
-    </div>
-    <div class="room11">
-      <a href="/addMapRoom/<%= communityMap[0].mapID %>/room11" style="text-decoration: none; color: #333333">Room</a>
-    </div>
-    <div class="room12">
-      <a href="/addMapRoom/<%= communityMap[0].mapID %>/room12" style="text-decoration: none; color: #333333">Room</a>
-    </div>
-    <div class="room13">
-      <a href="/addMapRoom/<%= communityMap[0].mapID %>/room13" style="text-decoration: none; color: #333333">Room</a>
-    </div>
-    <div class="room14">
-      <a href="/addMapRoom/<%= communityMap[0].mapID %>/room14" style="text-decoration: none; color: #333333">Room</a>
-    </div>
-    <div class="room15">
-      <a href="/addMapRoom/<%= communityMap[0].mapID %>/room15" style="text-decoration: none; color: #333333">Room</a>
-    </div>
-	  <div class="room16">
-      <a href="/addMapRoom/<%= communityMap[0].mapID %>/room16" style="text-decoration: none; color: #333333">Room</a>
-    </div>
-    <div class="room17">
-      <a href="/addMapRoom/<%= communityMap[0].mapID %>/room17" style="text-decoration: none; color: #333333">Room</a>
-    </div>
-    <div class="room18">
-      <a href="/addMapRoom/<%= communityMap[0].mapID %>/room18" style="text-decoration: none; color: #333333">Room</a>
-    </div>
-  </div>
+  <% if (Employee.communityID == "minor") { %> 
+
+    <div class="wrapper1">
+        <div class="room1">
+          <a href="/addMapRoom/<%= communityMap[0].mapID %>/room1" style="text-decoration: none; color: #333333">Room</a>
+        </div>
+        <div class="room2">
+          <a href="/addMapRoom/<%= communityMap[0].mapID %>/room2" style="text-decoration: none; color: #333333">Room</a>
+        </div>
+        <div class="room3">
+          <a href="/addMapRoom/<%= communityMap[0].mapID %>/room3" style="text-decoration: none; color: #333333">Room</a>
+        </div>
+        <div class="room4">
+          <a href="/addMapRoom/<%= communityMap[0].mapID %>/room4" style="text-decoration: none; color: #333333">Room</a>
+        </div>
+        <div class="room5">
+          <a href="/addMapRoom/<%= communityMap[0].mapID %>/room5" style="text-decoration: none; color: #333333">Room</a>
+        </div>
+        <div class="room6">
+          <a href="/addMapRoom/<%= communityMap[0].mapID %>/room6" style="text-decoration: none; color: #333333">Room</a>
+        </div>
+    	  <div class="room7">
+          <a href="/addMapRoom/<%= communityMap[0].mapID %>/room7" style="text-decoration: none; color: #333333">Room</a>
+        </div>
+        <div class="room8">
+          <a href="/addMapRoom/<%= communityMap[0].mapID %>/room8" style="text-decoration: none; color: #333333">Room</a>
+        </div>
+        <div class="room9">
+          <a href="/addMapRoom/<%= communityMap[0].mapID %>/room9" style="text-decoration: none; color: #333333">Room</a>
+        </div>
+      </div>
+      <br>
+      <div class="wrapper1">
+        <div class="room10">
+          <a href="/addMapRoom/<%= communityMap[0].mapID %>/room10" style="text-decoration: none; color: #333333">Room</a>
+        </div>
+        <div class="room11">
+          <a href="/addMapRoom/<%= communityMap[0].mapID %>/room11" style="text-decoration: none; color: #333333">Room</a>
+        </div>
+        <div class="room12">
+          <a href="/addMapRoom/<%= communityMap[0].mapID %>/room12" style="text-decoration: none; color: #333333">Room</a>
+        </div>
+        <div class="room13">
+          <a href="/addMapRoom/<%= communityMap[0].mapID %>/room13" style="text-decoration: none; color: #333333">Room</a>
+        </div>
+        <div class="room14">
+          <a href="/addMapRoom/<%= communityMap[0].mapID %>/room14" style="text-decoration: none; color: #333333">Room</a>
+        </div>
+        <div class="room15">
+          <a href="/addMapRoom/<%= communityMap[0].mapID %>/room15" style="text-decoration: none; color: #333333">Room</a>
+        </div>
+    	  <div class="room16">
+          <a href="/addMapRoom/<%= communityMap[0].mapID %>/room16" style="text-decoration: none; color: #333333">Room</a>
+        </div>
+        <div class="room17">
+          <a href="/addMapRoom/<%= communityMap[0].mapID %>/room17" style="text-decoration: none; color: #333333">Room</a>
+        </div>
+        <div class="room18">
+          <a href="/addMapRoom/<%= communityMap[0].mapID %>/room18" style="text-decoration: none; color: #333333">Room</a>
+        </div>
+      </div>
+    <% } %>
+
+    <% if (Employee.communityID == "martin") { %> 
+
+      <div class="wrapper2" style="margin:auto; width: 50%;">
+          <div class="room6">
+            <a href="/addMapRoom/<%= communityMap[0].mapID %>/room6" style="text-decoration: none; color: #333333">Room</a>
+          </div>
+          <div class="room7">
+            <a href="/addMapRoom/<%= communityMap[0].mapID %>/room7" style="text-decoration: none; color: #333333">Room</a>
+          </div>
+          <div class="room8">
+            <a href="/addMapRoom/<%= communityMap[0].mapID %>/room8" style="text-decoration: none; color: #333333">Room</a>
+          </div>
+          <div class="room9">
+            <a href="/addMapRoom/<%= communityMap[0].mapID %>/room9" style="text-decoration: none; color: #333333">Room</a>
+          </div>
+          <div class="room10">
+            <a href="/addMapRoom/<%= communityMap[0].mapID %>/room10" style="text-decoration: none; color: #333333">Room</a>
+          </div>
+          <div class="room11">
+            <a href="/addMapRoom/<%= communityMap[0].mapID %>/room11" style="text-decoration: none; color: #333333">Room</a>
+          </div><div class="room12">
+            <a href="/addMapRoom/<%= communityMap[0].mapID %>/room12" style="text-decoration: none; color: #333333">Room</a>
+          </div>
+          <div class="room13">
+            <a href="/addMapRoom/<%= communityMap[0].mapID %>/room13" style="text-decoration: none; color: #333333">Room</a>
+          </div>
+        </div>
+        <br>
+        <div class="wrapper2" style="margin:auto; width: 50%;">
+          <div class="room5">
+            <a href="/addMapRoom/<%= communityMap[0].mapID %>/room5" style="text-decoration: none; color: #333333">Room</a>
+          </div>
+          <div style="background-color: #FFFFFF"></div>
+          <div style="background-color: #FFFFFF"></div>
+          <div style="background-color: #FFFFFF"></div>
+          <div style="background-color: #FFFFFF"></div>
+          <div style="background-color: #FFFFFF"></div>
+          <div style="background-color: #FFFFFF"></div>
+          <div class="room14">
+            <a href="/addMapRoom/<%= communityMap[0].mapID %>/room14" style="text-decoration: none; color: #333333">Room</a>
+          </div>
+        </div>
+        <br>
+        <div class="wrapper2" style="margin:auto; width: 50%;">
+          <div class="room4">
+            <a href="/addMapRoom/<%= communityMap[0].mapID %>/room4" style="text-decoration: none; color: #333333">Room</a>
+          </div>
+          <div style="background-color: #FFFFFF"></div>
+          <div style="background-color: #FFFFFF"></div>
+          <div style="background-color: #FFFFFF"></div>
+          <div style="background-color: #FFFFFF"></div>
+          <div style="background-color: #FFFFFF"></div>
+          <div style="background-color: #FFFFFF"></div>
+          <div class="room15">
+            <a href="/addMapRoom/<%= communityMap[0].mapID %>/room15" style="text-decoration: none; color: #333333">Room</a>
+          </div>
+        </div>
+        <br>
+        <div class="wrapper2" style="margin:auto; width: 50%;">
+          <div class="room3">
+            <a href="/addMapRoom/<%= communityMap[0].mapID %>/room3" style="text-decoration: none; color: #333333">Room</a>
+          </div>
+          <div style="background-color: #FFFFFF"></div>
+          <div style="background-color: #FFFFFF"></div>
+          <div style="background-color: #FFFFFF"></div>
+          <div style="background-color: #FFFFFF"></div>
+          <div style="background-color: #FFFFFF"></div>
+          <div style="background-color: #FFFFFF"></div>
+          <div class="room16">
+            <a href="/addMapRoom/<%= communityMap[0].mapID %>/room16" style="text-decoration: none; color: #333333">Room</a>
+          </div>
+        </div>
+        <br>
+        <div class="wrapper2" style="margin:auto; width: 50%;">
+          <div class="room2">
+            <a href="/addMapRoom/<%= communityMap[0].mapID %>/room2" style="text-decoration: none; color: #333333">Room</a>
+          </div>
+          <div style="background-color: #FFFFFF"></div>
+          <div style="background-color: #FFFFFF"></div>
+          <div style="background-color: #FFFFFF"></div>
+          <div style="background-color: #FFFFFF"></div>
+          <div style="background-color: #FFFFFF"></div>
+          <div style="background-color: #FFFFFF"></div>
+          <div class="room17">
+            <a href="/addMapRoom/<%= communityMap[0].mapID %>/room17" style="text-decoration: none; color: #333333">Room</a>
+          </div>
+        </div>
+        <br>
+        <div class="wrapper2" style="margin:auto; width: 50%;">
+          <div class="room25">
+            <a href="/addMapRoom/<%= communityMap[0].mapID %>/room25" style="text-decoration: none; color: #333333">Room</a>
+          </div>
+          <div class="room24">
+            <a href="/addMapRoom/<%= communityMap[0].mapID %>/room24" style="text-decoration: none; color: #333333">Room</a>
+          </div>
+          <div class="room23">
+            <a href="/addMapRoom/<%= communityMap[0].mapID %>/room23" style="text-decoration: none; color: #333333">Room</a>
+          </div>
+          <div class="room22">
+            <a href="/addMapRoom/<%= communityMap[0].mapID %>/room22" style="text-decoration: none; color: #333333">Room</a>
+          </div>
+          <div class="room21">
+            <a href="/addMapRoom/<%= communityMap[0].mapID %>/room21" style="text-decoration: none; color: #333333">Room</a>
+          </div>
+          <div class="room20">
+            <a href="/addMapRoom/<%= communityMap[0].mapID %>/room20" style="text-decoration: none; color: #333333">Room</a>
+          </div>
+          <div class="room19">
+            <a href="/addMapRoom/<%= communityMap[0].mapID %>/room19" style="text-decoration: none; color: #333333">Room</a>
+          </div>
+          <div class="room18">
+            <a href="/addMapRoom/<%= communityMap[0].mapID %>/room18" style="text-decoration: none; color: #333333">Room</a>
+          </div>
+        </div>
+    <% } %>
 
 	<hr>
+
+  <form method="post" action="/deleteMapping/<%= communityMap[0].mapID %>">
+    <p align = "center"><button type="submit" class="btn btn-warning btn-lg">Delete</button></p>
+  </form><br>
+
 	<p align="center">
         <a href="/mapping" class="btn btn-default btn-sm"><span class="fa fa-arrow-circle-left"></span> Back</a>
         <a href="/logout" class="btn btn-default btn-sm"><span class="fa fa-sign-out-alt"></span> Logout</a>
