@@ -135,7 +135,7 @@ module.exports = function(app, passport) {
 
 			var query = "SELECT * FROM CommunityMap WHERE communityID = ? AND floorLevel = ?";
 			connection.query(query, [communityID, floorLevel], function(err, rows, fields) {
-			if (err) throw err;
+				if (err) throw err;
 
 				res.render('viewMapping.ejs', {
 					Employee: req.user,

@@ -58,7 +58,8 @@
 <body>
 <div class="container">
 
-	<h1 align="center"><span class="fa fa-sitemap"></span> Community Map - Week of <%=communityMap[0].mapDate%></h1><br>
+	<h1 align="center"><span class="fa fa-sitemap"></span> Community Map - Week of <%= communityMap[0].mapDate.getMonth() + 1%>/<%= communityMap[0].mapDate.getDate()%>/<%= communityMap[0].mapDate.getFullYear()%></h1><br>
+  
 	<p align="center">Click a box to fill in the info for each room. Generated templates are approximate, and you may not use all rooms on your Community Map. If a room is empty, or the map is too big, simply do not fill in those rooms. Maps are generated to over-estimate layouts, so a map should never be too small. Fill in the map the way that makes the most sense to you.</p>
   <p align="center"><b>For best results, please only use the Community Mapping module on a desktop computer.</b></p><br>
 

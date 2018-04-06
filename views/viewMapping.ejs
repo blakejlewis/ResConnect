@@ -25,8 +25,9 @@
 		<a href="/viewMap/<%= Maps[i].mapID %>" style="text-decoration: none; color: #333333">
 			<div class="well" align="center">
 
-				<h3>Community Map for <%= Maps[i].floorLevel%>th Floor</h3>
-				<p>Week of <%= Maps[i].mapDate%></p>
+				<h3>Community Map for Floor <%= Maps[i].floorLevel%></h3>
+				<p><%=Employee.firstName%> <%=Employee.lastName%></p>
+				<p>Week of <%= Maps[i].mapDate.getMonth() + 1%>/<%= Maps[i].mapDate.getDate()%>/<%= Maps[i].mapDate.getFullYear()%></p>
 			</div>
 		</a>
 	<% } %>
