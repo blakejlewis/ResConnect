@@ -4,6 +4,7 @@
 <html>
 <head>
 	<title>ResConnect Signup</title>
+	<link rel="shortcut icon" type="image/ico" href="/public/favicon.ico"/>
     <p align="center">
     <a href="/"><img src="./public/images/ResConnectBanner.png" width="50%" height="50%" alt="ResConnect Logo"/></a></p>
 	<link rel="stylesheet" href="//netdna.bootstrapcdn.com/bootstrap/3.0.2/css/bootstrap.min.css"> <!-- load bootstrap css -->
@@ -30,27 +31,27 @@
 		<form action="/signup" method="post">
 			<div class="form-group">
 				<label>Emp ID</label>
-				<input type="number" class="form-control" name="empID">
+				<input type="number" class="form-control" name="empID" required>
 			</div>
 			<div class="form-group">
 				<label>Web ID</label>
-				<input type="text" class="form-control" name="webID">
+				<input type="text" class="form-control" name="webID" required>
 			</div>
 			<div class="form-group">
 				<label>Password</label>
-				<input type="password" class="form-control" name="password">
+				<input type="password" class="form-control" name="password" required>
 			</div>
 			<div class="form-group">
 				<label>First Name</label>
-				<input type="text" class="form-control" name="firstName">
+				<input type="text" class="form-control" name="firstName" required>
 			</div>
 			<div class="form-group">
 				<label>Last Name</label>
-				<input type="text" class="form-control" name="lastName">
+				<input type="text" class="form-control" name="lastName" required>
 			</div>
 			<div class="form-group">
 				<label>Birthday</label>
-				<input type="date" class="form-control" name="birthday">
+				<input type="date" class="form-control" name="birthday" required>
 			</div>
 			<div class="form-group">
 				<label>Position Type</label><br>
@@ -68,7 +69,7 @@
 			</div>
 			<div class="form-group">
 				<label>Floor Level</label>
-				<input type="number" class="form-control" name="floorLevel">
+				<input type="number" class="form-control" name="floorLevel" required>
 			</div>
 		</div>
 

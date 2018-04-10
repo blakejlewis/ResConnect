@@ -4,6 +4,7 @@
 <html>
 <head>
 	<title>New Roommate Agreement</title>
+	<link rel="shortcut icon" type="image/ico" href="/public/favicon.ico"/>
     <p align="center">
     <a href="/profile"><img src="./public/images/ResConnectBanner.png" width="50%" height="50%" alt="ResConnect Logo"/></a></p>
 	<link rel="stylesheet" href="//netdna.bootstrapcdn.com/bootstrap/3.0.2/css/bootstrap.min.css"> <!-- load bootstrap css -->
@@ -27,15 +28,15 @@
 			<h3>Basic Information</h3><br>
 			<div class="form-group">
 				<label>Room Number</label>
-				<input type="number" class="form-control" name="roomNumber">
+				<input type="number" class="form-control" name="roomNumber" required>
 			</div>
 			<div class="form-group">
 				<label>Roommate A Full Name</label>
-				<input type="text" class="form-control" name="roommate1">
+				<input type="text" class="form-control" name="roommate1" required>
 			</div>
 			<div class="form-group">
 				<label>Roommate B Full Name</label>
-				<input type="text" class="form-control" name="roommate2">
+				<input type="text" class="form-control" name="roommate2" required>
 			</div>
 	</div>
 
@@ -44,37 +45,37 @@
 			<div class="form-group">
 				<label>Roommate A</label>
 				<p>You can tell when I'm stressed when I...</p>
-				<input type="text" class="form-control" name="stressor1">
+				<input type="text" class="form-control" name="stressor1" required>
 			</div>
 			<div class="form-group">
 				<p>I manage stress by...</p>
-				<input type="text" class="form-control" name="stressManagement1">
+				<input type="text" class="form-control" name="stressManagement1" required>
 			</div>
 			<div class="form-group">
 				<p>When I'm stressed, it helps when someone...</p>
-				<input type="text" class="form-control" name="stressHelp1">
+				<input type="text" class="form-control" name="stressHelp1" required>
 			</div>
 			<div class="form-group">
 				<p>I am most comfortable communicating feelings via... (ex. texting, face-to-face, notes).</p>
-				<input type="text" class="form-control" name="communicationVia1">
+				<input type="text" class="form-control" name="communicationVia1" required>
 			</div>
 
 			<div class="form-group">
 				<label>Roommate B</label>
 				<p>You can tell when I'm stressed when I...</p>
-				<input type="text" class="form-control" name="stressor2">
+				<input type="text" class="form-control" name="stressor2" required>
 			</div>
 			<div class="form-group">
 				<p>I manage stress by...</p>
-				<input type="text" class="form-control" name="stressManagement2">
+				<input type="text" class="form-control" name="stressManagement2" required>
 			</div>
 			<div class="form-group">
 				<p>When I'm stressed, it helps when someone...</p>
-				<input type="text" class="form-control" name="stressHelp2">
+				<input type="text" class="form-control" name="stressHelp2" required>
 			</div>
 			<div class="form-group">
 				<p>I am most comfortable communicating feelings via... (ex. texting, face-to-face, notes).</p>
-				<input type="text" class="form-control" name="communicationVia2">
+				<input type="text" class="form-control" name="communicationVia2" required>
 			</div><br>
 	</div>
 
@@ -83,17 +84,17 @@
 		<div class="form-group">
 			<label>Study Preferences</label>
 			<p>We prefer to work on homework during the following portions of our day/night: (ex. Morning, Afternoon, Evening, Late Night)</p>
-			<input type="text" class="form-control" name="studyTime">
+			<input type="text" class="form-control" name="studyTime" required>
 		</div>
 		<div class="form-group">
 			<label>Activities While Studying</label>
 			<p>While we are working on homework, we are comfortable with the following activities taking place (Ex. Music (headphones?), TV/Netflix (headphones?), Guests working, Guests Hanging out, Video Games, etc...) </p>
-			<input type="text" class="form-control" name="studyActivities">
+			<input type="text" class="form-control" name="studyActivities" required>
 		</div>
 		<div class="form-group">
 			<label>Special Adjustments</label>
 			<p>We would like to change our study schedule and habits during special parts of the year: (Exams, Bid Week, Gamedays, etc...) <b>If none, write "none"</b></p>
-			<input type="text" class="form-control" name="studyAdjustments">
+			<input type="text" class="form-control" name="studyAdjustments" required>
 		</div><br>
 	</div>
 
@@ -102,17 +103,17 @@
 		<div class="form-group">
 			<label>Weekday Sleep Time</label>
 			<p>On school nights (Sunday-Thursday) we agree to begin getting quiet to go to sleep around the following time: </p>
-			<input type="time" class="form-control" name="weekdaySleeptime">
+			<input type="time" class="form-control" name="weekdaySleeptime" required>
 		</div>
 		<div class="form-group">
 			<label>Weekend Sleep Time</label>
 			<p>On weekends (Friday, Saturday) we agree to begin getting quiet to go to sleep around the following time: </p>
-			<input type="time" class="form-control" name="weekendSleeptime">
+			<input type="time" class="form-control" name="weekendSleeptime" required>
 		</div>
 		<div class="form-group">
 			<label>Activities While Sleeping</label>
 			<p>While one or both of us are sleeping, we are comfortable with the following activities taking place (Ex. Lights On/Off, Music (headphones?), TV/Netflix (headphones?), Guests working, Guests Hanging out, Video Games, etc...) </p>
-			<input type="text" class="form-control" name="sleepActivities">
+			<input type="text" class="form-control" name="sleepActivities" required>
 		</div><br>
 	</div>
 
@@ -121,21 +122,21 @@
 		<div class="form-group">
 			<label>Roommate A</label>
 			<p>Cleaning Responsibilities: (Ex. Responsible for own side, taking out trash, vacuuming, bathroom, picking up clothes, etc...)</p>
-			<input type="text" class="form-control" name="cleanTasks1">
+			<input type="text" class="form-control" name="cleanTasks1" required>
 		</div>
 		<div class="form-group">
 			<p>Frequency: I will complete my responsibilities every...</p>
-			<input type="text" class="form-control" name="cleanFrequency1">
+			<input type="text" class="form-control" name="cleanFrequency1" required>
 		</div>
 
 		<div class="form-group">
 			<label>Roommate B</label>
 			<p>Cleaning Responsibilities: (Ex. Responsible for own side, taking out trash, vacuuming, bathroom, picking up clothes, etc...)</p>
-			<input type="text" class="form-control" name="cleanTasks2">
+			<input type="text" class="form-control" name="cleanTasks2" required>
 		</div>
 		<div class="form-group">
 			<p>Frequency: I will complete my responsibilities every...</p>
-			<input type="text" class="form-control" name="cleanFrequency2">
+			<input type="text" class="form-control" name="cleanFrequency2" required>
 		</div><br>
 	</div>
 
@@ -144,26 +145,26 @@
 		<div class="form-group">
 			<label>Asking for Permission</label>
 			<p>We prefer the following communication before using one another's belongings:</p>
-			<input type="text" class="form-control" name="belongingPermission">
+			<input type="text" class="form-control" name="belongingPermission" required>
 		</div>
 		<div class="form-group">
 			<label>Shared Belongings</label>
 			<p>We are comfortable sharing the following items in each category <b>(please write "none" if you are not comfortable sharing items in a category)</b></p>
 			<b>&nbsp;&nbsp;&nbsp;Electronics</b>
-			<input type="text" class="form-control" name="sharedElectronics">
+			<input type="text" class="form-control" name="sharedElectronics" required>
 			<b>&nbsp;&nbsp;&nbsp;Clothing/Accessories</b>
-			<input type="text" class="form-control" name="sharedClothes">
+			<input type="text" class="form-control" name="sharedClothes" required>
 			<b>&nbsp;&nbsp;&nbsp;Food/Drink</b>
-			<input type="text" class="form-control" name="sharedFood">
+			<input type="text" class="form-control" name="sharedFood" required>
 			<b>&nbsp;&nbsp;&nbsp;Household Items/Toiletries</b>
-			<input type="text" class="form-control" name="sharedHousehold">
+			<input type="text" class="form-control" name="sharedHousehold" required>
 			<b>&nbsp;&nbsp;&nbsp;Other Items</b>
-			<input type="text" class="form-control" name="sharedOther">
+			<input type="text" class="form-control" name="sharedOther" required>
 		</div>
 		<div class="form-group">
 			<label>While I'm Away</label>
 			<p>If one roommate is away for the night/weekend, the following itms can be shared by the other roommate or their guests (think about food, beds, etc...): </p>
-			<input type="text" class="form-control" name="whileAway">
+			<input type="text" class="form-control" name="whileAway" required>
 		</div><br>
 	</div>
 
@@ -173,32 +174,32 @@
 			<label>Respect</label>
 			<p>We agree to refrain from gossip, notes, as well as uses of social media or videos/photos without knowledge that portray one another in a negative light</p><br>
 			<label>Please indicate how each roommate will respect each other's personal privacy:</label>
-			<input type="text" class="form-control" name="respectPrivacy">
+			<input type="text" class="form-control" name="respectPrivacy" required>
 		</div><br>
 		<div class="form-group">
 			<label>Personal Habits</label>
 			<p>We acknowledge below personal habits and personal differences and recognize the impact they may have on our roommate relationship (consider social, academic, and personal habits as well as pet peeves): </p>
 			<label>Roommate A</label>
 			<p>Personal Habits</p>
-			<input type="text" class="form-control" name="roommate1Habits">
+			<input type="text" class="form-control" name="roommate1Habits" required>
 			<p>Pet Peeves</p>
-			<input type="text" class="form-control" name="roommate1PetPeeves"><br>
+			<input type="text" class="form-control" name="roommate1PetPeeves" required><br>
 
 			<label>Roommate B</label>
 			<p>Personal Habits</p>
-			<input type="text" class="form-control" name="roommate2Habits">
+			<input type="text" class="form-control" name="roommate2Habits" required>
 			<p>Pet Peeves</p>
-			<input type="text" class="form-control" name="roommate2PetPeeves">
+			<input type="text" class="form-control" name="roommate2PetPeeves" required>
 		</div><br>
 		<div class="form-group">
 			<label>Respect for Guests</label>
 			<p>If we want to have guests visit us in our room (different/same gender) during visitation OR would like to have guests stay the weekend, we will ask permission in the following ways: </p>
-			<input type="text" class="form-control" name="guestPermission">
+			<input type="text" class="form-control" name="guestPermission" required>
 		</div>
 		<div class="form-group">
 			<label>Privacy with Guests</label>
 			<p>If we have guests and we want to have 1-1 time with the guest without the roommate present, we will clearly communicate this by: </p>
-			<input type="text" class="form-control" name="guestPrivacy">
+			<input type="text" class="form-control" name="guestPrivacy" required>
 		</div><br>
 	</div>
 
@@ -208,7 +209,7 @@
 			<label>Locking Doors</label>
 			<b>Only you can use your student ID. You should never let guests/friends use your ID to enter your building or room. This is against policy</b>
 			<br><br><p>We want our door shut and locked (not taped or propped) during the following times (Ex. Sleeping, Showering, When no one is home, At all times, Never, etc...)</p>
-			<input type="text" class="form-control" name="whenLocked">
+			<input type="text" class="form-control" name="whenLocked" required>
 		</div>
 		<div class="form-group">
 			<label>Alcohol and Drugs</label>
@@ -225,12 +226,12 @@
 		<div class="form-group">
 			<label>Room Temperature</label>
 			<p>The temperature in our room may be altered in the following ways: (Thermostat, Fan, Window, etc...)</p>
-			<input type="text" class="form-control" name="temperature">
+			<input type="text" class="form-control" name="temperature" required>
 		</div>
 		<div class="form-group">
 			<label>Property Damage</label>
 			<p>If property/items in the room (university or personal) are damaged by us or our guests, we will tell each other and handle it in the following ways:</p>
-			<input type="text" class="form-control" name="damage">
+			<input type="text" class="form-control" name="damage" required>
 		</div><br>
 	</div>
 
@@ -259,9 +260,9 @@
 		<div class="form-group">
 			<p>We agree to uphold the terms and conditions listed herein, please type your name in the spaces provided below as a digital signature.</p>
 			<label>Roommate A</label>
-			<input type="text" class="form-control" name="roommate1Signature"><br>
+			<input type="text" class="form-control" name="roommate1Signature" required><br>
 			<label>Roommate B</label>
-			<input type="text" class="form-control" name="roommate2Signature">
+			<input type="text" class="form-control" name="roommate2Signature" required>
 		</div><br><br>
 	</div>
 

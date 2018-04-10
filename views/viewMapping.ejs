@@ -4,6 +4,7 @@
 <html>
 <head>
 	<title>Community Maps</title>
+	<link rel="shortcut icon" type="image/ico" href="/public/favicon.ico"/>
     <p align="center">
     <a href="/profile"><img src="./public/images/ResConnectBanner.png" width="50%" height="50%" alt="ResConnect Logo"/></a></p>
 	<link rel="stylesheet" href="//netdna.bootstrapcdn.com/bootstrap/3.0.2/css/bootstrap.min.css"> <!-- load bootstrap css -->
@@ -26,7 +27,7 @@
 			<div class="well" align="center">
 
 				<h3>Community Map for Floor <%= Maps[i].floorLevel%></h3>
-				<p><%=Employee.firstName%> <%=Employee.lastName%></p>
+				<p><%=Maps[i].caName%></p>
 				<p>Week of <%= Maps[i].mapDate.getMonth() + 1%>/<%= Maps[i].mapDate.getDate()%>/<%= Maps[i].mapDate.getFullYear()%></p>
 			</div>
 		</a>

@@ -7,6 +7,7 @@
 	var cookieParser = require('cookie-parser');
 	var bodyParser = require('body-parser');
 	var morgan = require('morgan');
+	var formidable = require('formidable');
 	var app      = express();
 	var port     = process.env.PORT || 1848;
 
@@ -16,9 +17,7 @@
 
 	require('./config/passport')(passport); // pass passport for configuration
 	
-	app.use('/public/images/', express.static('./public/images'));
-
-	app.use(favicon(__dirname + './public/favicon.ico'));
+	app.use('/public', express.static('public'));
 
 	// set up our express application
 	app.use(morgan('dev')); // log every request to the console

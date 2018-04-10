@@ -107,14 +107,15 @@ module.exports = function(app, passport) {
 	app.post('/newMapping', function(req, res){
         var newMapMysql = {
            	caID: req.user.empID,
+           	caName: req.user.firstName + " " + req.user.lastName,
             mapDate: req.body.mapDate,
             floorLevel: req.user.floorLevel,
             communityID: req.user.communityID
         };
 
-        var insertQuery = "INSERT INTO CommunityMap ( caID, mapDate, floorLevel, communityID ) values (?,?,?,?)";
+        var insertQuery = "INSERT INTO CommunityMap ( caID, caName, mapDate, floorLevel, communityID ) VALUES (?,?,?,?,?)";
 
-        connection.query(insertQuery, [newMapMysql.caID, newMapMysql.mapDate, newMapMysql.floorLevel, newMapMysql.communityID], function(err,rows) {});
+        connection.query(insertQuery, [newMapMysql.caID, newMapMysql.caName, newMapMysql.mapDate, newMapMysql.floorLevel, newMapMysql.communityID], function(err,rows) {});
 
 		var query = "SELECT * FROM CommunityMap WHERE mapDate = ? AND caID = ?";
 		connection.query(query, [newMapMysql.mapDate, newMapMysql.caID], function(err, rows, fields) {
@@ -242,7 +243,7 @@ module.exports = function(app, passport) {
             factsAndInteractions: req.body.factsAndInteractions
         };
 
-        var insertQuery = "INSERT INTO CommunityMapData ( roomNumber, mapID, mapRoom, resident1, resident2, roomColorID, leaderInRoom, visitMost, notSeen, factsAndInteractions ) values (?,?,?,?,?,?,?,?,?,?)";
+        var insertQuery = "INSERT INTO CommunityMapData ( roomNumber, mapID, mapRoom, resident1, resident2, roomColorID, leaderInRoom, visitMost, notSeen, factsAndInteractions ) VALUES (?,?,?,?,?,?,?,?,?,?)";
 
         connection.query(insertQuery, [newMapRoomMysql.roomNumber, mapID, mapRoom, newMapRoomMysql.resident1, newMapRoomMysql.resident2, newMapRoomMysql.roomColorID, newMapRoomMysql.leaderInRoom, newMapRoomMysql.visitMost, newMapRoomMysql.notSeen, newMapRoomMysql.factsAndInteractions], function(err,rows) {
         	if(err) throw err;
@@ -338,7 +339,7 @@ module.exports = function(app, passport) {
 
 		if(req.user.permissionsType == 1) {
 
-			var query = "SELECT * FROM RoommateAgreement WHERE communityID = ? AND floorLevel = ?";
+			var query = "SELECT * FROM RoommateAgreement WHERE (communityID = ? AND floorLevel = ?) ORDER BY roomNumber ASC";
 			connection.query(query, [communityID, floorLevel], function(err, rows, fields) {
 			if (err) throw err;
 
@@ -350,7 +351,7 @@ module.exports = function(app, passport) {
 		}
 		else if(req.user.permissionsType == 2) {
 
-			var query = "SELECT * FROM RoommateAgreement WHERE communityID = ?";
+			var query = "SELECT * FROM RoommateAgreement WHERE (communityID = ?) ORDER BY roomNumber ASC";
 			connection.query(query, communityID, function(err, rows, fields) {
 				if (err) throw err;
 
@@ -468,7 +469,7 @@ module.exports = function(app, passport) {
 			connection.query(query, CommunityID, function(err, rows, fields) {
 				if (err) throw err;
 
-				res.render('viewProposal.ejs', {
+				res.render('viewProposals.ejs', {
 					Employee: req.user,
 					Proposals: rows
 				});
@@ -490,7 +491,7 @@ module.exports = function(app, passport) {
             eventPRA: req.body.eventPRA
         };
 
-        var insertQuery = "INSERT INTO ProgramProposal ( communityID, programProposer, eventName, eventDateTime, eventLocation, eventDescription, learningOutcome, eventPRA ) values (?,?,?,?,?,?,?,?)";
+        var insertQuery = "INSERT INTO ProgramProposal ( communityID, programProposer, eventName, eventDateTime, eventLocation, eventDescription, learningOutcome, eventPRA ) VALUES (?,?,?,?,?,?,?,?)";
 
         connection.query(insertQuery, [newProgramProposalMysql.communityID, newProgramProposalMysql.programProposer, newProgramProposalMysql.eventName, newProgramProposalMysql.eventDateTime, newProgramProposalMysql.eventLocation, newProgramProposalMysql.eventDescription, newProgramProposalMysql.learningOutcome, newProgramProposalMysql.eventPRA], function(err,rows) {});
 		res.redirect(302, '/proposal');

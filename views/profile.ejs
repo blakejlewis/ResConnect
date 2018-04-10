@@ -4,6 +4,7 @@
 <html>
 <head>
 	<title>ResConnect Home</title>
+	<link rel="shortcut icon" type="image/ico" href="/public/favicon.ico"/>
 	<p align="center">
     <img src="./public/images/ResConnectBanner.png" width="50%" height="50%" alt="ResConnect Logo"/></p>
     
@@ -49,7 +50,18 @@
 				<div class="well">
 					<h3><span class="fa fa-users"></span> Community Mapping</h3>
 
-					<p>Click this module to create a new Community Map or view past ones.</p>
+					<%if (Employee.permissionsType == 1) { %>
+
+						<p>Click this module to create a new Community Map or view past ones.</p>
+
+					<% } %>
+
+					<%if (Employee.permissionsType == 2) { %>
+
+						<p>Click this to review Community Maps created by your staff.</p>
+						
+					<% } %>
+
 
 				</div>
 			</div>
@@ -69,7 +81,17 @@
 				<div class="well">
 					<h3><span class="fa fa-paper-plane"></span> Program Proposals</h3>
 
-					<p>Click this module to submit a Program Proposal to your supervisor.</p>
+					<%if (Employee.permissionsType == 1) { %>
+
+						<p>Click this module to submit a Program Proposal to your supervisor.</p>
+
+					<% } %>
+
+					<%if (Employee.permissionsType == 2) { %>
+
+						<p>Click this to review Program Proposals submitted by your staff.</p>
+						
+					<% } %>
 
 				</div>
 			</div>

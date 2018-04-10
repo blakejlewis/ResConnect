@@ -4,6 +4,7 @@
 <html>
 <head>
 	<title>New Program Proposal</title>
+	<link rel="shortcut icon" type="image/ico" href="/public/favicon.ico"/>
     <p align="center">
     <a href="/profile"><img src="./public/images/ResConnectBanner.png" width="50%" height="50%" alt="ResConnect Logo"/></a></p>
 	<link rel="stylesheet" href="//netdna.bootstrapcdn.com/bootstrap/3.0.2/css/bootstrap.min.css"> <!-- load bootstrap css -->
@@ -19,30 +20,32 @@
 <div class="col-sm-6 col-sm-offset-3">
 
 	<h1><span class="fa fa-paper-plane"></span> Submit a Program Proposal</h1><br>
-	<p align="center">Your supervisor will review this proposal and contact you regarding approval.</p><br>
+	<p align="center">Your supervisor will review this proposal and contact you regarding approval. You may attach a supplement Purchase Request Authorization (PRA) form if you wish; the template is below.
+
+	<br></br><a href="./public/files/PRA.xlsx" download class="btn btn-default btn-sm"><span class="fa fa-download"></span> Download PRA Template</a></p><br>
 
 	<!-- PROPOSAL FORM -->
 	<div class="well">
 		<form action="/proposal" method="post">
 			<div class="form-group">
 				<label>Event Name</label>
-				<input type="text" class="form-control" name="eventName">
+				<input type="text" class="form-control" name="eventName" required>
 			</div>
 			<div class="form-group">
 				<label>Event Date and Time</label>
-				<input type="datetime-local" class="form-control" name="eventDateTime">
+				<input type="datetime-local" class="form-control" name="eventDateTime" required>
 			</div>
 			<div class="form-group">
 				<label>Event Location</label>
-				<input type="text" class="form-control" name="eventLocation">
+				<input type="text" class="form-control" name="eventLocation" required>
 			</div>
 			<div class="form-group">
 				<label>Event Description</label>
-				<input type="text" class="form-control" name="eventDescription">
+				<input type="text" class="form-control" name="eventDescription" required>
 			</div>
 			<div class="form-group">
 				<label>Learning Outcome</label>
-				<input type="text" class="form-control" name="learningOutcome">
+				<input type="text" class="form-control" name="learningOutcome" required>
 			</div>
 			<div class="form-group">
 				<label>Event PRA</label>
