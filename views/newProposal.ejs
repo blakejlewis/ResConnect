@@ -26,7 +26,7 @@
 
 	<!-- PROPOSAL FORM -->
 	<div class="well">
-		<form action="/proposal" method="post">
+		<form action="/newProposal" method="post">
 			<div class="form-group">
 				<label>Event Name</label>
 				<input type="text" class="form-control" name="eventName" required>
@@ -49,7 +49,8 @@
 			</div>
 			<div class="form-group">
 				<label>Event PRA</label>
-				<input type="text" class="form-control" name="eventPRA">
+				<p>Only upload filled out PRA excel files</p>
+				<input type="file" accept=".xlsx" class="form-control" name="eventPRA">
 			</div>
 	</div>
 

@@ -7,7 +7,8 @@
 	var cookieParser = require('cookie-parser');
 	var bodyParser = require('body-parser');
 	var morgan = require('morgan');
-	var formidable = require('formidable');
+
+	var upload = require('express-fileupload');
 	var app      = express();
 	var port     = process.env.PORT || 1848;
 
@@ -28,6 +29,7 @@
 	app.use(bodyParser.json());
 
 	app.set('view engine', 'ejs'); // set up ejs for templating
+	app.use(upload());
 
 	// required for passport
 	app.use(session({

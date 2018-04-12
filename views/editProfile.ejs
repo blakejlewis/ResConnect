@@ -13,18 +13,38 @@
     <style>
         body        { padding-top:20px;}
     </style>
+    <a align="center" style="text-decoration: none; color: #333333"><h1><span class="fa fa-user"></span> Your ResConnect Profile</h1></a>
 </head>
 <body>
 <div class="container">
 
 <div class="col-sm-6 col-sm-offset-3">
+	<br>
+	<div class="well">
+		<h3 align="center">Profile information</h3>
+		<p align="center">If any of the following information is incorrect, please contact Associate Director for Student Learning Jeannie Hopper at <b>jlhopper@olemiss.edu.</b></p><br>
+		<h4>Employee <b>#<%= Employee.empID%></b></h4>
+		<h4>You are assigned to <b><%= Community[0].communityName%></b> 
+			<%if(Employee.permissionsType == 1) { %> <b>Floor <%=Employee.floorLevel%></b> <%}%>
 
-	<a align="center" style="text-decoration: none; color: #333333"><h1><span class="fa fa-user"></span> Update Account Information</h1><br>
-	<p>In case you would like to update your preferred name or change your password, use the following form.</p></a><br>
+			as a 
+
+		<%if(Employee.permissionsType == 1){ %>
+			<b>Student Staff Employee</b> (CA)
+		<%}%>
+
+		<%if(Employee.permissionsType == 2){ %>
+			<b>Building Supervisor</b> (GCD/CC)
+		<%}%>
+		
+		</h4>
+	</div>
 
 	<!-- UPDATE FORM -->
 	<div class="well">
 		<form action="/editProfile" method="post">
+			<h3 align="center">Update account information</h3>
+			<p align="center">Use the following form to update your preferred name or your password.</p><br>
 			<div class="form-group">
 				<label>New Password</label>
 				<input type="password" class="form-control" name="password">

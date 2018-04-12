@@ -68,8 +68,16 @@ module.exports = function(app, passport) {
 	});
 
 	app.get('/editProfile', isLoggedIn, function(req, res) {
-		res.render('editProfile.ejs', {
-			Employee: req.user
+
+		var query = "SELECT * FROM Community WHERE communityID = ?";
+		var communityID = req.user.communityID;
+
+		connection.query(query, communityID, function(err, rows, fields) {
+
+			res.render('editProfile.ejs', {
+				Employee: req.user,
+				Community: rows
+			});
 		});
 	});
 
@@ -121,7 +129,7 @@ module.exports = function(app, passport) {
 		connection.query(query, [newMapMysql.mapDate, newMapMysql.caID], function(err, rows, fields) {
 			if (err) throw err;
 
-			res.render('mapLayout.ejs', {
+			res.render('mapLayoutNoData.ejs', {
 				Employee: req.user,
 				communityMap: rows
 			});
@@ -164,13 +172,30 @@ module.exports = function(app, passport) {
 		var query = ("SELECT * FROM CommunityMap WHERE mapID = ?");
 		connection.query(query, mapID, function(err, rows, fields){
 			if (err) throw err;
+			var rows1 = rows;
 
-			res.render('mapLayout.ejs', {
-				Employee: req.user,
-				communityMap: rows
+			var query2 = ("SELECT * FROM CommunityMapData WHERE mapID = ?");
+			connection.query(query2, mapID, function(err, rows, fields){
+				if(err) throw err;
+				var rows2 = rows;
+
+				if(rows2 !== 0){
+
+					res.render('mapLayoutData.ejs', {
+						Employee: req.user,
+						communityMap: rows1,
+						communityMapData: rows2,
+					});
+				}
+				else{
+
+					res.render('mapLayoutNoData.ejs', {
+						Employee: req.user,
+						communityMap: rows1
+					});
+				}
 			});
 		});
-
 	});
 
 	app.post('/deleteMapping/:id', isLoggedIn, function(req, res) {
@@ -454,6 +479,26 @@ module.exports = function(app, passport) {
 		});
 	});
 
+	app.post('/uploadCLP', isLoggedIn, function(req, res) {
+		var communityID = req.user.communityID;
+
+		console.log(req.files);
+
+		var clpFile = req.files.clpFile;
+		var clpName = req.files.clpFile.name;
+	
+		clpFile.mv('/' + clpName, function(err) {
+			if(err)
+				return console.log(err);
+		});
+
+		var updateQuery = ("UPDATE Community SET clpFile = ? WHERE communityID = ?");
+		connection.query(updateQuery, [clpName, communityID], function(err, rows) {
+			if(err) throw err;
+			res.redirect(302, '/proposal');
+		});
+	});
+
 
 	app.get('/proposal', isLoggedIn, function(req, res) {
 		if(req.user.permissionsType == 1) {
@@ -480,6 +525,7 @@ module.exports = function(app, passport) {
 
 	// process the signup form
 	app.post('/newProposal', function(req, res){
+
         var newProgramProposalMysql = {
            	communityID: req.user.communityID,
             programProposer: (req.user.firstName + " " + req.user.lastName),
@@ -487,14 +533,42 @@ module.exports = function(app, passport) {
             eventDateTime: req.body.eventDateTime,
             eventLocation: req.body.eventLocation,
             eventDescription: req.body.eventDescription,
-            learningOutcome: req.body.learningOutcome,
-            eventPRA: req.body.eventPRA
+            learningOutcome: req.body.learningOutcome
         };
 
-        var insertQuery = "INSERT INTO ProgramProposal ( communityID, programProposer, eventName, eventDateTime, eventLocation, eventDescription, learningOutcome, eventPRA ) VALUES (?,?,?,?,?,?,?,?)";
+        console.log(req.files);
 
-        connection.query(insertQuery, [newProgramProposalMysql.communityID, newProgramProposalMysql.programProposer, newProgramProposalMysql.eventName, newProgramProposalMysql.eventDateTime, newProgramProposalMysql.eventLocation, newProgramProposalMysql.eventDescription, newProgramProposalMysql.learningOutcome, newProgramProposalMysql.eventPRA], function(err,rows) {});
-		res.redirect(302, '/proposal');
+        var insertQuery = "INSERT INTO ProgramProposal ( communityID, programProposer, eventName, eventDateTime, eventLocation, eventDescription, learningOutcome) VALUES (?,?,?,?,?,?,?)";
+
+        connection.query(insertQuery, [newProgramProposalMysql.communityID, newProgramProposalMysql.programProposer, newProgramProposalMysql.eventName, newProgramProposalMysql.eventDateTime, newProgramProposalMysql.eventLocation, newProgramProposalMysql.eventDescription, newProgramProposalMysql.learningOutcome], function(err,rows) {
+        	if(err)
+        		console.log(err);
+        });
+
+        var selectQuery = "SELECT * FROM ProgramProposal WHERE eventName = ? AND communityID = ?";
+        connection.query(selectQuery, [newProgramProposalMysql.eventName, newProgramProposalMysql.communityID], function(err, rows) {
+        	if(err)
+        		console.log(err);
+
+        	var eventPRA = req.files.eventPRA;
+        	console.log(eventPRA);
+			var praName = rows.proposal_ID + "PRA.xlsx";
+			console.log(praName);
+			eventPRA.mv('/public/files/' + praName, function(err) {
+				if(err)
+					return console.log(err);
+			});
+
+			var updateQuery = ("UPDATE ProgramProposal SET eventPRA = ? WHERE proposal_ID = ?");
+			connection.query(updateQuery, [praName, rows.proposal_ID], function(err, rows) {
+				if(err)
+					console.log(err);
+
+				res.redirect(302, '/proposal');
+			});
+
+
+        });
 	});
 
 	app.get('/editProposal/:id', isLoggedIn, function(req, res) {

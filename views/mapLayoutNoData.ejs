@@ -16,20 +16,10 @@
         position: relative;
         text-align: center;
       }
-
     	.wrapper1{
-      		display:grid;
-      		grid-template-columns: 10% 10% 10% 10% 10% 10% 10% 10% 10% 10%;
-      		/*
-      		grid-column-gap:1em;
-      		grid-row-gap:1em;
-      		*/
-      		grid-gap:1em;
-    	}
-
-      .wrapper2{
           display:grid;
-          grid-template-columns: 10.5% 10.5% 10.5% 10.5% 10.5% 10.5% 10.5% 10.5%;
+          grid-template-columns: 10% 10% 10% 10% 10% 10% 10% 10% 10% 10%;
+          justify-content: center;
           /*
           grid-column-gap:1em;
           grid-row-gap:1em;
@@ -37,6 +27,16 @@
           grid-gap:1em;
       }
 
+      .wrapper2{
+          display:grid;
+          grid-template-columns: 18% 18% 18% 18% 18% 18% 18% 18%;
+          justify-content: center;
+          /*
+          grid-column-gap:1em;
+          grid-row-gap:1em;
+          */
+          grid-gap:1em;
+      }
     	.wrapper1 > div{
       		background:#eee;
       		padding:1em;
@@ -44,7 +44,6 @@
     	.wrapper1 > div:nth-child(odd){
       		background:#ddd;
     	}
-
       .wrapper2 > div{
           background:#eee;
           padding:1em;
@@ -53,7 +52,6 @@
       .wrapper2 > div:nth-child(odd){
           background:#ddd;
       }
-
   </style>
 </head>
 <body>
@@ -65,7 +63,6 @@
   <p align="center"><b>For best results, please only use the Community Mapping module on a desktop computer.</b></p><br>
 
   <% if (Employee.communityID == "minor") { %> 
-
     <div class="wrapper1">
         <div class="room1">
           <a href="/addMapRoom/<%= communityMap[0].mapID %>/room1" style="text-decoration: none; color: #333333">Room</a>
@@ -128,7 +125,6 @@
     <% } %>
 
     <% if (Employee.communityID == "martin") { %> 
-
       <div class="wrapper2" style="margin:auto; width: 50%;">
           <div class="room6">
             <a href="/addMapRoom/<%= communityMap[0].mapID %>/room6" style="text-decoration: none; color: #333333">Room</a>
