@@ -20,7 +20,6 @@
     	.wrapper1{
       		display:grid;
       		grid-template-columns: 10% 10% 10% 10% 10% 10% 10% 10% 10% 10%;
-          justify-content: center;
       		/*
       		grid-column-gap:1em;
       		grid-row-gap:1em;
@@ -72,7 +71,6 @@
     <div class="wrapper1">
         <div class="room1">
           <a href="/addMapRoom/<%= communityMap[0].mapID %>/room1" style="text-decoration: none; color: #333333">Room
-            <%if(communityMapData !== "undefined") { %>
               <%for(var i = 0; i < communityMapData.length; i++) { %>
                 <%if(communityMapData[i].mapRoom == "room1") { %>
                   <b><%=communityMapData[i].roomNumber%></b> <span class="fa fa-check-square"></span>
@@ -95,13 +93,11 @@
                     }
                   </style>
                 <%}%>
-              <%}%>
             <%}%>
           </a>
         </div>
         <div class="room2">
           <a href="/addMapRoom/<%= communityMap[0].mapID %>/room2" style="text-decoration: none; color: #333333">Room
-            <%if(communityMapData !== "undefined") { %>
               <%for(var i = 0; i < communityMapData.length; i++) { %>
                 <%if(communityMapData[i].mapRoom == "room2") { %>
                   <b><%=communityMapData[i].roomNumber%></b> <span class="fa fa-check-square"></span>
@@ -124,13 +120,11 @@
                     }
                   </style>
                 <%}%>
-              <%}%>
             <%}%>
           </a>
         </div>
         <div class="room3">
           <a href="/addMapRoom/<%= communityMap[0].mapID %>/room3" style="text-decoration: none; color: #333333">Room
-            <%if(communityMapData !== "undefined") { %>
               <%for(var i = 0; i < communityMapData.length; i++) { %>
                 <%if(communityMapData[i].mapRoom == "room3") { %>
                   <b><%=communityMapData[i].roomNumber%></b> <span class="fa fa-check-square"></span>
@@ -154,12 +148,10 @@
                   </style>
                 <%}%>
               <%}%>
-            <%}%>
           </a>
         </div>
         <div class="room4">
           <a href="/addMapRoom/<%= communityMap[0].mapID %>/room4" style="text-decoration: none; color: #333333">Room
-            <%if(communityMapData !== "undefined") { %>
               <%for(var i = 0; i < communityMapData.length; i++) { %>
                 <%if(communityMapData[i].mapRoom == "room4") { %>
                   <b><%=communityMapData[i].roomNumber%></b> <span class="fa fa-check-square"></span>
@@ -183,12 +175,10 @@
                   </style>
                 <%}%>
               <%}%>
-            <%}%>
           </a>
         </div>
         <div class="room5">
           <a href="/addMapRoom/<%= communityMap[0].mapID %>/room5" style="text-decoration: none; color: #333333">Room
-            <%if(communityMapData !== "undefined") { %>
                 <%for(var i = 0; i < communityMapData.length; i++) { %>
                   <%if(communityMapData[i].mapRoom == "room5") { %>
                     <b><%=communityMapData[i].roomNumber%></b> <span class="fa fa-check-square"></span>
@@ -212,12 +202,10 @@
                   </style>
                   <%}%>
                 <%}%>
-              <%}%>
           </a>
         </div>
         <div class="room6">
           <a href="/addMapRoom/<%= communityMap[0].mapID %>/room6" style="text-decoration: none; color: #333333">Room
-            <%if(communityMapData !== "undefined") { %>
               <%for(var i = 0; i < communityMapData.length; i++) { %>
                 <%if(communityMapData[i].mapRoom == "room6") { %>
                   <b><%=communityMapData[i].roomNumber%></b> <span class="fa fa-check-square"></span>
@@ -240,13 +228,11 @@
                     }
                   </style>
                 <%}%>
-              <%}%>
             <%}%>
           </a>
         </div>
     	  <div class="room7">
           <a href="/addMapRoom/<%= communityMap[0].mapID %>/room7" style="text-decoration: none; color: #333333">Room
-            <%if(communityMapData !== "undefined") { %>
               <%for(var i = 0; i < communityMapData.length; i++) { %>
                 <%if(communityMapData[i].mapRoom == "room7") { %>
                   <b><%=communityMapData[i].roomNumber%></b> <span class="fa fa-check-square"></span>
@@ -269,13 +255,11 @@
                     }
                   </style>
                 <%}%>
-              <%}%>
             <%}%>
           </a>
         </div>
         <div class="room8">
           <a href="/addMapRoom/<%= communityMap[0].mapID %>/room8" style="text-decoration: none; color: #333333">Room
-            <%if(communityMapData !== "undefined") { %>
               <%for(var i = 0; i < communityMapData.length; i++) { %>
                 <%if(communityMapData[i].mapRoom == "room8") { %>
                   <b><%=communityMapData[i].roomNumber%></b> <span class="fa fa-check-square"></span>
@@ -297,14 +281,12 @@
                       <%}%>
                     }
                   </style>
-                <%}%>
               <%}%>
             <%}%>
           </a>
         </div>
         <div class="room9">
           <a href="/addMapRoom/<%= communityMap[0].mapID %>/room9" style="text-decoration: none; color: #333333">Room
-            <%if(communityMapData !== "undefined") { %>
               <%for(var i = 0; i < communityMapData.length; i++) { %>
                 <%if(communityMapData[i].mapRoom == "room9") { %>
                   <b><%=communityMapData[i].roomNumber%></b> <span class="fa fa-check-square"></span>
@@ -327,7 +309,6 @@
                     }
                   </style>
                 <%}%>
-              <%}%>
             <%}%>
           </a>
         </div>
@@ -336,7 +317,6 @@
       <div class="wrapper1">
         <div class="room10">
           <a href="/addMapRoom/<%= communityMap[0].mapID %>/room10" style="text-decoration: none; color: #333333">Room
-            <%if(communityMapData !== "undefined") { %>
               <%for(var i = 0; i < communityMapData.length; i++) { %>
                 <%if(communityMapData[i].mapRoom == "room10") { %>
                   <b><%=communityMapData[i].roomNumber%></b> <span class="fa fa-check-square"></span>
@@ -359,13 +339,11 @@
                     }
                   </style>
                 <%}%>
-              <%}%>
             <%}%>
           </a>
         </div>
         <div class="room11">
           <a href="/addMapRoom/<%= communityMap[0].mapID %>/room11" style="text-decoration: none; color: #333333">Room
-            <%if(communityMapData !== "undefined") { %>
               <%for(var i = 0; i < communityMapData.length; i++) { %>
                 <%if(communityMapData[i].mapRoom == "room11") { %>
                   <b><%=communityMapData[i].roomNumber%></b> <span class="fa fa-check-square"></span>
@@ -388,13 +366,11 @@
                     }
                   </style>
                 <%}%>
-              <%}%>
             <%}%>
           </a>
         </div>
         <div class="room12">
           <a href="/addMapRoom/<%= communityMap[0].mapID %>/room12" style="text-decoration: none; color: #333333">Room
-            <%if(communityMapData !== "undefined") { %>
               <%for(var i = 0; i < communityMapData.length; i++) { %>
                 <%if(communityMapData[i].mapRoom == "room12") { %>
                   <b><%=communityMapData[i].roomNumber%></b> <span class="fa fa-check-square"></span>
@@ -417,13 +393,11 @@
                     }
                   </style>
                 <%}%>
-              <%}%>
             <%}%>
           </a>
         </div>
         <div class="room13">
           <a href="/addMapRoom/<%= communityMap[0].mapID %>/room13" style="text-decoration: none; color: #333333">Room
-            <%if(communityMapData !== "undefined") { %>
               <%for(var i = 0; i < communityMapData.length; i++) { %>
                 <%if(communityMapData[i].mapRoom == "room13") { %>
                   <b><%=communityMapData[i].roomNumber%></b> <span class="fa fa-check-square"></span>
@@ -447,12 +421,10 @@
                   </style>
                 <%}%>
               <%}%>
-            <%}%>
           </a>
         </div>
         <div class="room14">
           <a href="/addMapRoom/<%= communityMap[0].mapID %>/room14" style="text-decoration: none; color: #333333">Room
-            <%if(communityMapData !== "undefined") { %>
               <%for(var i = 0; i < communityMapData.length; i++) { %>
                 <%if(communityMapData[i].mapRoom == "room14") { %>
                   <b><%=communityMapData[i].roomNumber%></b> <span class="fa fa-check-square"></span>
@@ -476,12 +448,10 @@
                   </style>
                 <%}%>
               <%}%>
-            <%}%>
           </a>
         </div>
         <div class="room15">
           <a href="/addMapRoom/<%= communityMap[0].mapID %>/room15" style="text-decoration: none; color: #333333">Room
-            <%if(communityMapData !== "undefined") { %>
               <%for(var i = 0; i < communityMapData.length; i++) { %>
                 <%if(communityMapData[i].mapRoom == "room15") { %>
                   <b><%=communityMapData[i].roomNumber%></b> <span class="fa fa-check-square"></span>
@@ -504,13 +474,11 @@
                     }
                   </style>
                 <%}%>
-              <%}%>
             <%}%>
           </a>
         </div>
     	  <div class="room16">
           <a href="/addMapRoom/<%= communityMap[0].mapID %>/room16" style="text-decoration: none; color: #333333">Room
-            <%if(communityMapData !== "undefined") { %>
               <%for(var i = 0; i < communityMapData.length; i++) { %>
                 <%if(communityMapData[i].mapRoom == "room16") { %>
                   <b><%=communityMapData[i].roomNumber%></b> <span class="fa fa-check-square"></span>
@@ -533,13 +501,11 @@
                     }
                   </style>
                 <%}%>
-              <%}%>
             <%}%>
           </a>
         </div>
         <div class="room17">
           <a href="/addMapRoom/<%= communityMap[0].mapID %>/room17" style="text-decoration: none; color: #333333">Room
-            <%if(communityMapData !== "undefined") { %>
               <%for(var i = 0; i < communityMapData.length; i++) { %>
                 <%if(communityMapData[i].mapRoom == "room17") { %>
                   <b><%=communityMapData[i].roomNumber%></b> <span class="fa fa-check-square"></span>
@@ -562,13 +528,11 @@
                     }
                   </style>
                 <%}%>
-              <%}%>
             <%}%>
           </a>
         </div>
         <div class="room18">
           <a href="/addMapRoom/<%= communityMap[0].mapID %>/room18" style="text-decoration: none; color: #333333">Room
-            <%if(communityMapData !== "undefined") { %>
               <%for(var i = 0; i < communityMapData.length; i++) { %>
                 <%if(communityMapData[i].mapRoom == "room18") { %>
                   <b><%=communityMapData[i].roomNumber%></b> <span class="fa fa-check-square"></span>
@@ -591,7 +555,6 @@
                     }
                   </style>
                 <%}%>
-              <%}%>
             <%}%>
           </a>
         </div>
@@ -603,7 +566,6 @@
       <div class="wrapper2" style="margin:auto; width: 50%;">
           <div class="room6">
             <a href="/addMapRoom/<%= communityMap[0].mapID %>/room6" style="text-decoration: none; color: #333333">Room
-              <%if(communityMapData !== "undefined") { %>
               <%for(var i = 0; i < communityMapData.length; i++) { %>
                 <%if(communityMapData[i].mapRoom == "room6") { %>
                   <b><%=communityMapData[i].roomNumber%></b> <span class="fa fa-check-square"></span>
@@ -626,13 +588,11 @@
                     }
                   </style>
                 <%}%>
-              <%}%>
             <%}%>
             </a>
           </div>
           <div class="room7">
             <a href="/addMapRoom/<%= communityMap[0].mapID %>/room7" style="text-decoration: none; color: #333333">Room
-              <%if(communityMapData !== "undefined") { %>
               <%for(var i = 0; i < communityMapData.length; i++) { %>
                 <%if(communityMapData[i].mapRoom == "room7") { %>
                   <b><%=communityMapData[i].roomNumber%></b> <span class="fa fa-check-square"></span>
@@ -654,14 +614,12 @@
                       <%}%>
                     }
                   </style>
-                <%}%>
               <%}%>
             <%}%>
             </a>
           </div>
           <div class="room8">
             <a href="/addMapRoom/<%= communityMap[0].mapID %>/room8" style="text-decoration: none; color: #333333">Room
-              <%if(communityMapData !== "undefined") { %>
               <%for(var i = 0; i < communityMapData.length; i++) { %>
                 <%if(communityMapData[i].mapRoom == "room8") { %>
                   <b><%=communityMapData[i].roomNumber%></b> <span class="fa fa-check-square"></span>
@@ -684,13 +642,11 @@
                     }
                   </style>
                 <%}%>
-              <%}%>
             <%}%>
             </a>
           </div>
           <div class="room9">
             <a href="/addMapRoom/<%= communityMap[0].mapID %>/room9" style="text-decoration: none; color: #333333">Room
-              <%if(communityMapData !== "undefined") { %>
               <%for(var i = 0; i < communityMapData.length; i++) { %>
                 <%if(communityMapData[i].mapRoom == "room9") { %>
                   <b><%=communityMapData[i].roomNumber%></b> <span class="fa fa-check-square"></span>
@@ -713,13 +669,11 @@
                     }
                   </style>
                 <%}%>
-              <%}%>
             <%}%>
             </a>
           </div>
           <div class="room10">
             <a href="/addMapRoom/<%= communityMap[0].mapID %>/room10" style="text-decoration: none; color: #333333">Room
-              <%if(communityMapData !== "undefined") { %>
               <%for(var i = 0; i < communityMapData.length; i++) { %>
                 <%if(communityMapData[i].mapRoom == "room10") { %>
                   <b><%=communityMapData[i].roomNumber%></b> <span class="fa fa-check-square"></span>
@@ -742,13 +696,11 @@
                     }
                   </style>
                 <%}%>
-              <%}%>
             <%}%>
             </a>
           </div>
           <div class="room11">
             <a href="/addMapRoom/<%= communityMap[0].mapID %>/room11" style="text-decoration: none; color: #333333">Room
-              <%if(communityMapData !== "undefined") { %>
               <%for(var i = 0; i < communityMapData.length; i++) { %>
                 <%if(communityMapData[i].mapRoom == "room11") { %>
                   <b><%=communityMapData[i].roomNumber%></b> <span class="fa fa-check-square"></span>
@@ -771,12 +723,10 @@
                     }
                   </style>
                 <%}%>
-              <%}%>
             <%}%>
             </a>
           </div><div class="room12">
             <a href="/addMapRoom/<%= communityMap[0].mapID %>/room12" style="text-decoration: none; color: #333333">Room
-              <%if(communityMapData !== "undefined") { %>
               <%for(var i = 0; i < communityMapData.length; i++) { %>
                 <%if(communityMapData[i].mapRoom == "room12") { %>
                   <b><%=communityMapData[i].roomNumber%></b> <span class="fa fa-check-square"></span>
@@ -800,12 +750,10 @@
                   </style>
                 <%}%>
               <%}%>
-            <%}%>
             </a>
           </div>
           <div class="room13">
             <a href="/addMapRoom/<%= communityMap[0].mapID %>/room13" style="text-decoration: none; color: #333333">Room
-              <%if(communityMapData !== "undefined") { %>
               <%for(var i = 0; i < communityMapData.length; i++) { %>
                 <%if(communityMapData[i].mapRoom == "room13") { %>
                   <b><%=communityMapData[i].roomNumber%></b> <span class="fa fa-check-square"></span>
@@ -828,7 +776,6 @@
                     }
                   </style>
                 <%}%>
-              <%}%>
             <%}%>
             </a>
           </div>
@@ -837,7 +784,6 @@
         <div class="wrapper2" style="margin:auto; width: 50%;">
           <div class="room5">
             <a href="/addMapRoom/<%= communityMap[0].mapID %>/room5" style="text-decoration: none; color: #333333">Room
-              <%if(communityMapData !== "undefined") { %>
               <%for(var i = 0; i < communityMapData.length; i++) { %>
                 <%if(communityMapData[i].mapRoom == "room5") { %>
                   <b><%=communityMapData[i].roomNumber%></b> <span class="fa fa-check-square"></span>
@@ -859,7 +805,6 @@
                       <%}%>
                     }
                   </style>
-                <%}%>
               <%}%>
             <%}%>
             </a>
@@ -872,7 +817,6 @@
           <div style="background-color: #FFFFFF"></div>
           <div class="room14">
             <a href="/addMapRoom/<%= communityMap[0].mapID %>/room14" style="text-decoration: none; color: #333333">Room
-              <%if(communityMapData !== "undefined") { %>
               <%for(var i = 0; i < communityMapData.length; i++) { %>
                 <%if(communityMapData[i].mapRoom == "room14") { %>
                   <b><%=communityMapData[i].roomNumber%></b> <span class="fa fa-check-square"></span>
@@ -895,7 +839,6 @@
                     }
                   </style>
                 <%}%>
-              <%}%>
             <%}%>
             </a>
           </div>
@@ -904,7 +847,6 @@
         <div class="wrapper2" style="margin:auto; width: 50%;">
           <div class="room4">
             <a href="/addMapRoom/<%= communityMap[0].mapID %>/room4" style="text-decoration: none; color: #333333">Room
-              <%if(communityMapData !== "undefined") { %>
               <%for(var i = 0; i < communityMapData.length; i++) { %>
                 <%if(communityMapData[i].mapRoom == "room4") { %>
                   <b><%=communityMapData[i].roomNumber%></b> <span class="fa fa-check-square"></span>
@@ -927,7 +869,6 @@
                     }
                   </style>
                 <%}%>
-              <%}%>
             <%}%>
             </a>
           </div>
@@ -939,7 +880,6 @@
           <div style="background-color: #FFFFFF"></div>
           <div class="room15">
             <a href="/addMapRoom/<%= communityMap[0].mapID %>/room15" style="text-decoration: none; color: #333333">Room
-              <%if(communityMapData !== "undefined") { %>
               <%for(var i = 0; i < communityMapData.length; i++) { %>
                 <%if(communityMapData[i].mapRoom == "room15") { %>
                   <b><%=communityMapData[i].roomNumber%></b> <span class="fa fa-check-square"></span>
@@ -961,7 +901,6 @@
                       <%}%>
                     }
                   </style>
-                <%}%>
               <%}%>
             <%}%>
             </a>
@@ -971,7 +910,6 @@
         <div class="wrapper2" style="margin:auto; width: 50%;">
           <div class="room3">
             <a href="/addMapRoom/<%= communityMap[0].mapID %>/room3" style="text-decoration: none; color: #333333">Room
-              <%if(communityMapData !== "undefined") { %>
               <%for(var i = 0; i < communityMapData.length; i++) { %>
                 <%if(communityMapData[i].mapRoom == "room3") { %>
                   <b><%=communityMapData[i].roomNumber%></b> <span class="fa fa-check-square"></span>
@@ -994,7 +932,6 @@
                     }
                   </style>
                 <%}%>
-              <%}%>
             <%}%>
             </a>
           </div>
@@ -1006,7 +943,6 @@
           <div style="background-color: #FFFFFF"></div>
           <div class="room16">
             <a href="/addMapRoom/<%= communityMap[0].mapID %>/room16" style="text-decoration: none; color: #333333">Room
-              <%if(communityMapData !== "undefined") { %>
               <%for(var i = 0; i < communityMapData.length; i++) { %>
                 <%if(communityMapData[i].mapRoom == "room16") { %>
                   <b><%=communityMapData[i].roomNumber%></b> <span class="fa fa-check-square"></span>
@@ -1030,7 +966,6 @@
                   </style>
                 <%}%>
               <%}%>
-            <%}%>
             </a>
           </div>
         </div>
@@ -1038,7 +973,6 @@
         <div class="wrapper2" style="margin:auto; width: 50%;">
           <div class="room2">
             <a href="/addMapRoom/<%= communityMap[0].mapID %>/room2" style="text-decoration: none; color: #333333">Room
-              <%if(communityMapData !== "undefined") { %>
               <%for(var i = 0; i < communityMapData.length; i++) { %>
                 <%if(communityMapData[i].mapRoom == "room2") { %>
                   <b><%=communityMapData[i].roomNumber%></b> <span class="fa fa-check-square"></span>
@@ -1061,7 +995,6 @@
                     }
                   </style>
                 <%}%>
-              <%}%>
             <%}%>
             </a>
           </div>
@@ -1073,7 +1006,6 @@
           <div style="background-color: #FFFFFF"></div>
           <div class="room17">
             <a href="/addMapRoom/<%= communityMap[0].mapID %>/room17" style="text-decoration: none; color: #333333">Room
-              <%if(communityMapData !== "undefined") { %>
               <%for(var i = 0; i < communityMapData.length; i++) { %>
                 <%if(communityMapData[i].mapRoom == "room17") { %>
                   <b><%=communityMapData[i].roomNumber%></b> <span class="fa fa-check-square"></span>
@@ -1096,7 +1028,6 @@
                     }
                   </style>
                 <%}%>
-              <%}%>
             <%}%>
             </a>
           </div>
@@ -1105,7 +1036,6 @@
         <div class="wrapper2" style="margin:auto; width: 50%;">
           <div class="room25">
             <a href="/addMapRoom/<%= communityMap[0].mapID %>/room25" style="text-decoration: none; color: #333333">Room
-              <%if(communityMapData !== "undefined") { %>
               <%for(var i = 0; i < communityMapData.length; i++) { %>
                 <%if(communityMapData[i].mapRoom == "room25") { %>
                   <b><%=communityMapData[i].roomNumber%></b> <span class="fa fa-check-square"></span>
@@ -1128,13 +1058,11 @@
                     }
                   </style>
                 <%}%>
-              <%}%>
             <%}%>
             </a>
           </div>
           <div class="room24">
             <a href="/addMapRoom/<%= communityMap[0].mapID %>/room24" style="text-decoration: none; color: #333333">Room
-              <%if(communityMapData !== "undefined") { %>
               <%for(var i = 0; i < communityMapData.length; i++) { %>
                 <%if(communityMapData[i].mapRoom == "room24") { %>
                   <b><%=communityMapData[i].roomNumber%></b> <span class="fa fa-check-square"></span>
@@ -1156,14 +1084,12 @@
                       <%}%>
                     }
                   </style>
-                <%}%>
               <%}%>
             <%}%>
             </a>
           </div>
           <div class="room23">
             <a href="/addMapRoom/<%= communityMap[0].mapID %>/room23" style="text-decoration: none; color: #333333">Room
-              <%if(communityMapData !== "undefined") { %>
               <%for(var i = 0; i < communityMapData.length; i++) { %>
                 <%if(communityMapData[i].mapRoom == "room23") { %>
                   <b><%=communityMapData[i].roomNumber%></b> <span class="fa fa-check-square"></span>
@@ -1186,13 +1112,11 @@
                     }
                   </style>
                 <%}%>
-              <%}%>
             <%}%>
             </a>
           </div>
           <div class="room22">
             <a href="/addMapRoom/<%= communityMap[0].mapID %>/room22" style="text-decoration: none; color: #333333">Room
-              <%if(communityMapData !== "undefined") { %>
               <%for(var i = 0; i < communityMapData.length; i++) { %>
                 <%if(communityMapData[i].mapRoom == "room22") { %>
                   <b><%=communityMapData[i].roomNumber%></b> <span class="fa fa-check-square"></span>
@@ -1215,13 +1139,11 @@
                     }
                   </style>
                 <%}%>
-              <%}%>
             <%}%>
             </a>
           </div>
           <div class="room21">
             <a href="/addMapRoom/<%= communityMap[0].mapID %>/room21" style="text-decoration: none; color: #333333">Room
-              <%if(communityMapData !== "undefined") { %>
               <%for(var i = 0; i < communityMapData.length; i++) { %>
                 <%if(communityMapData[i].mapRoom == "room21") { %>
                   <b><%=communityMapData[i].roomNumber%></b> <span class="fa fa-check-square"></span>
@@ -1244,13 +1166,11 @@
                     }
                   </style>
                 <%}%>
-              <%}%>
             <%}%>
             </a>
           </div>
           <div class="room20">
             <a href="/addMapRoom/<%= communityMap[0].mapID %>/room20" style="text-decoration: none; color: #333333">Room
-              <%if(communityMapData !== "undefined") { %>
               <%for(var i = 0; i < communityMapData.length; i++) { %>
                 <%if(communityMapData[i].mapRoom == "room20") { %>
                   <b><%=communityMapData[i].roomNumber%></b> <span class="fa fa-check-square"></span>
@@ -1272,14 +1192,12 @@
                       <%}%>
                     }
                   </style>
-                <%}%>
               <%}%>
             <%}%>
             </a>
           </div>
           <div class="room19">
             <a href="/addMapRoom/<%= communityMap[0].mapID %>/room19" style="text-decoration: none; color: #333333">Room
-              <%if(communityMapData !== "undefined") { %>
               <%for(var i = 0; i < communityMapData.length; i++) { %>
                 <%if(communityMapData[i].mapRoom == "room19") { %>
                   <b><%=communityMapData[i].roomNumber%></b> <span class="fa fa-check-square"></span>
@@ -1302,13 +1220,11 @@
                     }
                   </style>
                 <%}%>
-              <%}%>
             <%}%>
             </a>
           </div>
           <div class="room18">
             <a href="/addMapRoom/<%= communityMap[0].mapID %>/room18" style="text-decoration: none; color: #333333">Room
-              <%if(communityMapData !== "undefined") { %>
               <%for(var i = 0; i < communityMapData.length; i++) { %>
                 <%if(communityMapData[i].mapRoom == "room18") { %>
                   <b><%=communityMapData[i].roomNumber%></b> <span class="fa fa-check-square"></span>
@@ -1331,7 +1247,6 @@
                     }
                   </style>
                 <%}%>
-              <%}%>
             <%}%>
             </a>
           </div>

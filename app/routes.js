@@ -2,6 +2,7 @@
 
 var mysql = require('mysql');
 var bcrypt = require('bcrypt-nodejs');
+var fs = require('fs');
 
 // Add the credentials to access database
 var connection = mysql.createConnection({
@@ -485,9 +486,9 @@ module.exports = function(app, passport) {
 		console.log(req.files);
 
 		var clpFile = req.files.clpFile;
-		var clpName = req.files.clpFile.name;
+		var clpName = communityID + "_CLP.pdf";
 	
-		clpFile.mv('/' + clpName, function(err) {
+		clpFile.mv('public/files/CLPs/' + clpName, function(err) {
 			if(err)
 				return console.log(err);
 		});
@@ -499,27 +500,57 @@ module.exports = function(app, passport) {
 		});
 	});
 
+	app.post('/deleteCLP/:id', isLoggedIn, function(req, res) {
+		var communityID = req.params.id;
+		var updateQuery = ("UPDATE Community SET clpFile = NULL WHERE communityID = ?");
+		connection.query(updateQuery, communityID, function(err, rows) {
+			if(err) throw err;
+		});
+
+		fs.unlink('public/files/CLPs/' + communityID + '_CLP.pdf', (err) => {
+			if(err) throw err;
+		});
+
+		res.redirect(302, '/proposal');
+
+	});
+
 
 	app.get('/proposal', isLoggedIn, function(req, res) {
+		communityID = req.user.communityID;
+
 		if(req.user.permissionsType == 1) {
-			res.render('newProposal.ejs', { 
-				Employee: req.user
-		 	});
+
+			var query = "SELECT * FROM Community WHERE communityID = ?";
+			connection.query(query, communityID, function(err, rows, fields) {
+				if (err) throw err;
+
+				res.render('newProposal.ejs', { 
+					Employee: req.user,
+					Community: rows
+		 		});
+			});
+	
 		}
 		else if(req.user.permissionsType == 2){
 
-			CommunityID = req.user.communityID;
-
-			var query = "SELECT * FROM ProgramProposal WHERE communityID = ?";
-			connection.query(query, CommunityID, function(err, rows, fields) {
+			var query1 = "SELECT * FROM ProgramProposal WHERE communityID = ?";
+			connection.query(query1, communityID, function(err, rows, fields) {
 				if (err) throw err;
+				rows1 = rows;
 
-				res.render('viewProposals.ejs', {
-					Employee: req.user,
-					Proposals: rows
+				var query2 = "SELECT * FROM Community WHERE communityID = ?";
+				connection.query(query2, communityID, function(err, rows, fields) {
+					if (err) throw err;
+					rows2 = rows;
+
+					res.render('viewProposals.ejs', {
+						Employee: req.user,
+						Proposals: rows1,
+						Community: rows2
+					});
 				});
 			});
-			
 		}
 	});
 
@@ -536,8 +567,6 @@ module.exports = function(app, passport) {
             learningOutcome: req.body.learningOutcome
         };
 
-        console.log(req.files);
-
         var insertQuery = "INSERT INTO ProgramProposal ( communityID, programProposer, eventName, eventDateTime, eventLocation, eventDescription, learningOutcome) VALUES (?,?,?,?,?,?,?)";
 
         connection.query(insertQuery, [newProgramProposalMysql.communityID, newProgramProposalMysql.programProposer, newProgramProposalMysql.eventName, newProgramProposalMysql.eventDateTime, newProgramProposalMysql.eventLocation, newProgramProposalMysql.eventDescription, newProgramProposalMysql.learningOutcome], function(err,rows) {
@@ -551,23 +580,21 @@ module.exports = function(app, passport) {
         		console.log(err);
 
         	var eventPRA = req.files.eventPRA;
-        	console.log(eventPRA);
-			var praName = rows.proposal_ID + "PRA.xlsx";
-			console.log(praName);
-			eventPRA.mv('/public/files/' + praName, function(err) {
+        
+			var praName = rows[0].proposal_ID + "_PRA.xlsx";
+			
+			eventPRA.mv('public/files/PRAs/' + praName, function(err) {
 				if(err)
 					return console.log(err);
 			});
 
 			var updateQuery = ("UPDATE ProgramProposal SET eventPRA = ? WHERE proposal_ID = ?");
-			connection.query(updateQuery, [praName, rows.proposal_ID], function(err, rows) {
+			connection.query(updateQuery, [praName, rows[0].proposal_ID], function(err, rows) {
 				if(err)
 					console.log(err);
 
 				res.redirect(302, '/proposal');
 			});
-
-
         });
 	});
 
@@ -586,6 +613,11 @@ module.exports = function(app, passport) {
 
 	app.post('/deleteProposal/:id', isLoggedIn, function(req, res) {
 		var proposal_ID = req.params.id;
+
+		fs.unlink('public/files/PRAs/' + proposal_ID + '_PRA.xlsx', (err) => {
+			if(err) throw err;
+		});
+
 		var deleteQuery = ("DELETE FROM ProgramProposal WHERE proposal_ID = ?");
 		connection.query(deleteQuery, proposal_ID, function(err, rows) {
 			if(err) throw err;

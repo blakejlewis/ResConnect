@@ -20,19 +20,34 @@
 <div class="col-sm-6 col-sm-offset-3">
 
 	<h1 align="center"><span class="fa fa-paper-plane"></span> View Program Proposals</h1><br>
-	<p align="center">Click on a Program Proposal below to view the full response and delete once approved or denied. You may also upload your community's Community Learning Plan below.</p><br>
+	<p align="center">Click on a Program Proposal below to view the full response and delete once approved or denied. You may also upload your community's Community Learning Plan below or delete it if you have uploaded one and would like to reupload it.</p><br>
 
-	<div class="well">
-		<form action="/uploadCLP" method="post" enctype="multipart/form-data">
-			<div class="form-group">
-				<label>Community Learning Plan</label>
-				<p>Only upload Community Learning Plans in PDF format.</p>
-				<input type="file" accept=".pdf" class="form-control" name="clpFile">
-			</div>
-	</div>
+	<%if(Community[0].clpFile == null) { %>
 
-		<button type="submit" class="btn btn-warning btn-lg">Upload</button>
-	</form>
+		<div class="well">
+			<form action="/uploadCLP" method="post" enctype="multipart/form-data">
+				<div class="form-group">
+					<label>Community Learning Plan</label>
+					<p>Only upload Community Learning Plans in PDF format.</p>
+					<input type="file" accept=".pdf" class="form-control" name="clpFile">
+				</div>
+		</div>
+
+			<button type="submit" class="btn btn-warning btn-lg">Upload</button>
+		</form>
+		<br></br>
+	<%}%>
+
+	<%if(Community[0].clpFile !== null) { %>
+
+		<p align="center"><a href="./public/files/CLPs/<%=Community[0].clpFile%>" download class="btn btn-default btn-sm"><span class="fa fa-download"></span> Download Community Learning Plan</a></p>
+
+		<form action="/deleteCLP/<%=Community[0].communityID%>" method="post">
+			<button type="submit" class="btn btn-warning btn-lg">Delete CLP</button>
+		</form>
+
+	<%}%>
+
 	<br>
 
 	<% for (var i=0; i < Proposals.length; i++) { %>

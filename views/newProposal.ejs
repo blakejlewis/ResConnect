@@ -20,13 +20,21 @@
 <div class="col-sm-6 col-sm-offset-3">
 
 	<h1><span class="fa fa-paper-plane"></span> Submit a Program Proposal</h1><br>
-	<p align="center">Your supervisor will review this proposal and contact you regarding approval. You may attach a supplement Purchase Request Authorization (PRA) form if you wish; the template is below.
+	<p align="center">Your supervisor will review this proposal and contact you regarding approval. You may attach a supplement Purchase Request Authorization (PRA) form if you wish; the template is below. You can also review your Community Learning Plan if your supervisor has uploaded it.
 
-	<br></br><a href="./public/files/PRA.xlsx" download class="btn btn-default btn-sm"><span class="fa fa-download"></span> Download PRA Template</a></p><br>
+	<br></br>
+
+	<a href="./public/files/PRA.xlsx" download class="btn btn-default btn-sm"><span class="fa fa-download"></span> Download PRA Template</a>
+
+	<%if(Community[0].clpFile !== null) { %>
+		<a href="./public/files/CLPs/<%=Community[0].clpFile%>" download class="btn btn-default btn-sm"><span class="fa fa-download"></span> Download Community Learning Plan</a>
+	<%}%>
+	</p>
+	<br>
 
 	<!-- PROPOSAL FORM -->
 	<div class="well">
-		<form action="/newProposal" method="post">
+		<form action="/newProposal" method="post" enctype="multipart/form-data">
 			<div class="form-group">
 				<label>Event Name</label>
 				<input type="text" class="form-control" name="eventName" required>
