@@ -1,43 +1,27 @@
 // app/routes.js
 
-var mysql = require('mysql');
 var bcrypt = require('bcrypt-nodejs');
 var fs = require('fs');
 
-// Add the credentials to access database
-var connection = mysql.createConnection({
-    host     : 'localhost',
-    user     : 'root',
-    password : 'trixie1',
-    database : 'resconnect'
-});
-
-connection.connect(function(err) {
-    if(err){
-        console.log(err.code);
-        console.log(err.fatal);
-    }
-    else
-        console.log('Connection successful');
-});
+var connection = require('../config/database');
 
 module.exports = function(app, passport) {
 
+	//FUNCTIONS FOR INDEX, LOGIN, SIGNUP
+
 	app.get('/', function(req, res) {
-		res.render('index.ejs'); // load the index.ejs file
+		res.render('index.ejs'); // load the homepage
 	});
 
 	app.get('/login', function(req, res) {
 
-		// render the page and pass in any flash data if it exists
-		res.render('login.ejs', { message: req.flash('loginMessage') });
+		res.render('login.ejs', { message: req.flash('loginMessage') }); // loads the login page
 	});
 
-	// process the login form
 	app.post('/login', passport.authenticate('local-login', {
             successRedirect : '/profile', // redirect to the secure profile section
             failureRedirect : '/login', // redirect back to the signup page if there is an error
-            failureFlash : true // allow flash messages
+            failureFlash : true
 		}),
         function(req, res) {
             console.log("hello");
@@ -51,16 +35,16 @@ module.exports = function(app, passport) {
     });
 
 	app.get('/signup', function(req, res) {
-		// render the page and pass in any flash data if it exists
 		res.render('signup.ejs', { message: req.flash('signupMessage') });
 	});
 
-	// process the signup form
 	app.post('/signup', passport.authenticate('local-signup', {
 		successRedirect : '/profile', // redirect to the secure profile section
 		failureRedirect : '/signup', // redirect back to the signup page if there is an error
-		failureFlash : true // allow flash messages
+		failureFlash : true 
 	}));
+
+	//FUNCTIONS FOR PROFILE PAGES AND DATA
 
 	app.get('/profile', isLoggedIn, function(req, res) {
 		res.render('profile.ejs', {
@@ -69,6 +53,8 @@ module.exports = function(app, passport) {
 	});
 
 	app.get('/editProfile', isLoggedIn, function(req, res) {
+
+		//this function loads the edit form for the profile when the profile module is clicked
 
 		var query = "SELECT * FROM Community WHERE communityID = ?";
 		var communityID = req.user.communityID;
@@ -83,6 +69,8 @@ module.exports = function(app, passport) {
 	});
 
 	app.post('/editProfile', isLoggedIn, function(req, res) {
+		// if the user decides to update their profile, then this post function updates the database
+
 		var updateProfileMysql = {
 			password: bcrypt.hashSync(req.body.password, null, null),
 			firstName: req.body.firstName,
@@ -95,11 +83,15 @@ module.exports = function(app, passport) {
 		res.redirect('/profile');
 	})
 
+	//FUNCTION FOR DUTY MODULE
+
 	app.get('/duty', isLoggedIn, function(req, res) {
 		res.render('duty.ejs', {
 			Employee: req.user
 		});
 	});
+
+	//FUNCTIONS FOR COMMUNITY MAPPING MODULE PAGES AND DATA
 
 	app.get('/mapping', isLoggedIn, function(req, res) {
 		res.render('mapping.ejs', {
@@ -108,12 +100,17 @@ module.exports = function(app, passport) {
 	});
 
 	app.get('/newMapping', isLoggedIn, function(req, res) {
+
+		//takes user to the new map page for date input
+
 		res.render('newMapping.ejs', {
 			Employee: req.user
 		});
 	});
 
 	app.post('/newMapping', function(req, res){
+
+		//when the date is entered, it takes the user to the map layout with no data attached to it yet
         var newMapMysql = {
            	caID: req.user.empID,
            	caName: req.user.firstName + " " + req.user.lastName,
@@ -138,12 +135,14 @@ module.exports = function(app, passport) {
 	});
 
 	app.get('/viewMapping', isLoggedIn, function(req, res) {
+
+		// this function displays the list of maps. permissions level 1 is CA, so they only see theirs. 2 is pro, and they see their community's
 		communityID = req.user.communityID;
 		floorLevel = req.user.floorLevel;
 
 		if(req.user.permissionsType == 1) {
 
-			var query = "SELECT * FROM CommunityMap WHERE communityID = ? AND floorLevel = ?";
+			var query = "SELECT * FROM CommunityMap WHERE communityID = ? AND floorLevel = ? ORDER BY mapDate ASC";
 			connection.query(query, [communityID, floorLevel], function(err, rows, fields) {
 				if (err) throw err;
 
@@ -155,7 +154,7 @@ module.exports = function(app, passport) {
 		}
 		else if(req.user.permissionsType == 2) {
 
-			var query = "SELECT * FROM CommunityMap WHERE communityID = ?";
+			var query = "SELECT * FROM CommunityMap WHERE communityID = ? ORDER BY mapDate ASC";
 			connection.query(query, communityID, function(err, rows, fields) {
 				if (err) throw err;
 
@@ -168,6 +167,9 @@ module.exports = function(app, passport) {
 	});
 
 	app.get('/viewMap/:id', isLoggedIn, function(req, res){
+
+		// gets the map that was chosen
+
 		let mapID = req.params.id;
 
 		var query = ("SELECT * FROM CommunityMap WHERE mapID = ?");
@@ -183,6 +185,8 @@ module.exports = function(app, passport) {
 				if(rows2 !== 0){
 
 					res.render('mapLayoutData.ejs', {
+
+						// if there is room data, display that data 
 						Employee: req.user,
 						communityMap: rows1,
 						communityMapData: rows2,
@@ -191,6 +195,9 @@ module.exports = function(app, passport) {
 				else{
 
 					res.render('mapLayoutNoData.ejs', {
+
+						// this is for a blank map with no data 
+
 						Employee: req.user,
 						communityMap: rows1
 					});
@@ -200,6 +207,8 @@ module.exports = function(app, passport) {
 	});
 
 	app.post('/deleteMapping/:id', isLoggedIn, function(req, res) {
+		// deletes a community map 
+
 		var mapID = req.params.id;
 
 		var deleteQueryMapInfo = ("DELETE FROM CommunityMapData WHERE mapID = ?");
@@ -230,6 +239,9 @@ module.exports = function(app, passport) {
 					var rows2 = rows;
 
 					res.render('addMapRoom.ejs', {
+
+						// this displays a form to add data to a room
+
 						Employee: req.user,
 						mapRoom: mapRoom,
 						communityMap: rows2
@@ -244,6 +256,9 @@ module.exports = function(app, passport) {
 				var rows2 = rows;
 
 					res.render('viewMapRoom.ejs', {
+
+						// this displays the room's full data if there is data attached to the room clicked
+
 						Employee: req.user,
 						mapRoom: mapRoom,
 						communityMapData: rows1,
@@ -255,6 +270,9 @@ module.exports = function(app, passport) {
 	});
 
 	app.post('/addMapRoom/:mapID/:mapRoom', function(req, res) {
+
+		// adds map room data to the database and takes the user back to the map layout with the updated data
+
 		let mapID = req.params.mapID;
 		let mapRoom = req.params.mapRoom;
 
@@ -278,7 +296,12 @@ module.exports = function(app, passport) {
         });
 	});
 
+	//FUNCTIONS FOR ROOMMATE AGREEMENT MODULE PAGES AND DATA
+
 	app.get('/agreement', isLoggedIn, function(req, res) {
+
+		// roommate management module
+
 		res.render('agreement.ejs', {
 			Employee: req.user
 		});
@@ -286,11 +309,15 @@ module.exports = function(app, passport) {
 
 	app.get('/newAgreement', isLoggedIn, function(req, res) {
 		res.render('newAgreement.ejs', {
+			// renders the agreement form
+
 			Employee: req.user
 		});
 	});
 
 	app.post('/newAgreement', function(req, res){
+		// add new roommate agreement to the database
+
 		var newAgreementMysql = {
 			communityID: req.user.communityID,
 			caID: req.user.empID,
@@ -360,6 +387,8 @@ module.exports = function(app, passport) {
 	});
 
 	app.get('/viewAgreement', isLoggedIn, function(req, res) {
+		// displays list of agreements. 1 sees they're own agreements, and 2 sees their community agreements. they are CA's and professionals, respectively.
+
 		communityID = req.user.communityID;
 		floorLevel = req.user.floorLevel;
 
@@ -390,6 +419,8 @@ module.exports = function(app, passport) {
 	});
 
 	app.get('/editAgreement/:id', isLoggedIn, function(req, res) {
+		// gets the edit agreement form with all agreement data filled in
+
 		let agreementID = req.params.id;
 		var query = ("SELECT * FROM RoommateAgreement WHERE agreementID = ?");
 		connection.query(query, agreementID, function(err, rows, fields){
@@ -403,6 +434,8 @@ module.exports = function(app, passport) {
 	});
 
 	app.post('/updateAgreement/:id', isLoggedIn, function(req, res) {
+		//posts the updated agreement
+
 		let agreementID = req.params.id;
 		var updateAgreementMysql = {
 			communityID: req.user.communityID,
@@ -472,6 +505,9 @@ module.exports = function(app, passport) {
 	});
 
 	app.post('/deleteAgreement/:id', isLoggedIn, function(req, res) {
+
+		// deletes a roommate agreement
+
 		var agreementID = req.params.id;
 		var deleteQuery = ("DELETE FROM RoommateAgreement WHERE agreementID = ?");
 		connection.query(deleteQuery, agreementID, function(err, rows) {
@@ -480,7 +516,11 @@ module.exports = function(app, passport) {
 		});
 	});
 
+	//FUNCTIONS FOR CLP UPLOADING AND ACCESS
+
 	app.post('/uploadCLP', isLoggedIn, function(req, res) {
+		// supervisor uploads the CLP for CA access
+
 		var communityID = req.user.communityID;
 
 		console.log(req.files);
@@ -501,6 +541,8 @@ module.exports = function(app, passport) {
 	});
 
 	app.post('/deleteCLP/:id', isLoggedIn, function(req, res) {
+		// supervisor removes CLP to replace it
+
 		var communityID = req.params.id;
 		var updateQuery = ("UPDATE Community SET clpFile = NULL WHERE communityID = ?");
 		connection.query(updateQuery, communityID, function(err, rows) {
@@ -515,8 +557,11 @@ module.exports = function(app, passport) {
 
 	});
 
+	//FUNCTIONS FOR PROGRAM PROPOSAL MODULE PAGES AND DATA
 
 	app.get('/proposal', isLoggedIn, function(req, res) {
+		//gets the proposal module, a list of proposals for level 2, and a proposal form for level 1.
+
 		communityID = req.user.communityID;
 
 		if(req.user.permissionsType == 1) {
@@ -554,8 +599,8 @@ module.exports = function(app, passport) {
 		}
 	});
 
-	// process the signup form
 	app.post('/newProposal', function(req, res){
+		// adds a new program proposal to the database. uploads a PRA if uploaded
 
         var newProgramProposalMysql = {
            	communityID: req.user.communityID,
@@ -574,31 +619,39 @@ module.exports = function(app, passport) {
         		console.log(err);
         });
 
-        var selectQuery = "SELECT * FROM ProgramProposal WHERE eventName = ? AND communityID = ?";
-        connection.query(selectQuery, [newProgramProposalMysql.eventName, newProgramProposalMysql.communityID], function(err, rows) {
-        	if(err)
-        		console.log(err);
+        if(req.files.eventPRA !== undefined){
 
-        	var eventPRA = req.files.eventPRA;
-        
-			var praName = rows[0].proposal_ID + "_PRA.xlsx";
-			
-			eventPRA.mv('public/files/PRAs/' + praName, function(err) {
-				if(err)
-					return console.log(err);
-			});
+	        var selectQuery = "SELECT * FROM ProgramProposal WHERE eventName = ? AND communityID = ?";
+	        connection.query(selectQuery, [newProgramProposalMysql.eventName, newProgramProposalMysql.communityID], function(err, rows) {
+	        	if(err)
+	        		console.log(err);
 
-			var updateQuery = ("UPDATE ProgramProposal SET eventPRA = ? WHERE proposal_ID = ?");
-			connection.query(updateQuery, [praName, rows[0].proposal_ID], function(err, rows) {
-				if(err)
-					console.log(err);
+	        	var eventPRA = req.files.eventPRA;
+	  
+				var praName = rows[0].proposal_ID + "_PRA.xlsx";
+				
+				eventPRA.mv('public/files/PRAs/' + praName, function(err) {
+					if(err)
+						return console.log(err);
+				});
 
-				res.redirect(302, '/proposal');
-			});
-        });
+				var updateQuery = ("UPDATE ProgramProposal SET eventPRA = ? WHERE proposal_ID = ?");
+				connection.query(updateQuery, [praName, rows[0].proposal_ID], function(err, rows) {
+					if(err)
+						console.log(err);
+
+					res.redirect(302, '/proposal');
+				});
+	        });
+    	}
+    	else{
+    		res.redirect(302, '/proposal');
+    	}
 	});
 
 	app.get('/editProposal/:id', isLoggedIn, function(req, res) {
+		//gets the proposal information with the data filled in
+
 		let proposal_ID = req.params.id;
 		var query = ("SELECT * FROM ProgramProposal WHERE proposal_ID = ?");
 		connection.query(query, proposal_ID, function(err, rows, fields){
@@ -612,6 +665,9 @@ module.exports = function(app, passport) {
 	});
 
 	app.post('/deleteProposal/:id', isLoggedIn, function(req, res) {
+
+		// deletes a program proposal
+
 		var proposal_ID = req.params.id;
 
 		fs.unlink('public/files/PRAs/' + proposal_ID + '_PRA.xlsx', (err) => {
@@ -625,14 +681,22 @@ module.exports = function(app, passport) {
 		});
 	});
 
+	//FUNCTION FOR LEADERSHIP MODULE
 
 	app.get('/leadership', isLoggedIn, function(req, res) {
+
+		// gets the leadership module
+
 		res.render('leadership.ejs', {
 			Employee: req.user
 		});
 	});
 
+	//FUNCTION FOR LOGOUT
+
 	app.get('/logout', function(req, res) {
+		// logs user out
+
 		req.logout();
 		res.redirect('/');
 	});

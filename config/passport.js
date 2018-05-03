@@ -1,26 +1,9 @@
 // config/passport.js
 
 var LocalStrategy   = require('passport-local').Strategy;
-var mysql = require('mysql');
+var LocalStrategy   = require('passport-local').Strategy;
 var bcrypt = require('bcrypt-nodejs');
-var dbconfig = require('./database');
-
-// Add the credentials to access database
-var connection = mysql.createConnection({
-    host     : 'localhost',
-    user     : 'root',
-    password : 'trixie1',
-    database : 'resconnect'
-});
-
-connection.connect(function(err) {
-    if(err){
-        console.log(err.code);
-        console.log(err.fatal);
-    }
-    else
-        console.log('Connection successful');
-});
+var connection = require('./database');
 
 module.exports = function(passport) {
 
@@ -71,6 +54,7 @@ module.exports = function(passport) {
                     var insertQuery = "INSERT INTO Employee ( empID, webID, password, firstName, lastName, birthday, permissionsType, communityID, floorLevel ) values (?,?,?,?,?,?,?,?,?)";
 
                     connection.query(insertQuery,[newUserMysql.empID, newUserMysql.webID, newUserMysql.password, newUserMysql.firstName, newUserMysql.lastName, newUserMysql.birthday, newUserMysql.permissionsType, newUserMysql.communityID, newUserMysql.floorLevel],function(err, rows) {
+                        if(err) throw err;
                    
                         return done(null, newUserMysql);
                     });
@@ -80,6 +64,7 @@ module.exports = function(passport) {
     );
 
     passport.use(
+        //logs the user in securely
         'local-login',
         new LocalStrategy({
 

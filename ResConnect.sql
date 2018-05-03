@@ -1,7 +1,4 @@
--- Created by Vertabelo (http://vertabelo.com)
--- Last modification date: 2018-03-08 01:31:41.628
 
--- tables
 -- Table: Community
 CREATE TABLE Community (
     communityID varchar(100) NOT NULL,
@@ -20,6 +17,7 @@ CREATE TABLE Community (
 CREATE TABLE CommunityMap (
     mapID int NOT NULL AUTO_INCREMENT,
     caID int NOT NULL,
+    caName varchar(100) NOT NULL,
     mapDate date NOT NULL,
     floorLevel int NOT NULL,
     communityID varchar(100) NOT NULL,
@@ -37,7 +35,7 @@ CREATE TABLE CommunityMapData (
     leaderInRoom bool NOT NULL,
     visitMost bool NOT NULL,
     notSeen bool NOT NULL,
-    factsAndInteractions varchar(100) NOT NULL,
+    factsAndInteractions varchar(10000) NOT NULL,
     CONSTRAINT CommunityMapData_pk PRIMARY KEY (roomNumber, mapID)
 );
 
@@ -74,6 +72,7 @@ CREATE TABLE RoommateAgreement (
     agreementID int NOT NULL AUTO_INCREMENT,
     communityID varchar(100) NOT NULL,
     caID int NOT NULL,
+    floorLevel int NOT NULL,
     roomNumber int NOT NULL,
     roommate1 varchar(100) NOT NULL,
     roommate2 varchar(100) NOT NULL,
@@ -85,9 +84,9 @@ CREATE TABLE RoommateAgreement (
     stressManagement2 varchar(100) NOT NULL,
     stressHelp2 varchar(100) NOT NULL,
     communicationVia2 varchar(100) NOT NULL,
-    studyTime char(1) NOT NULL,
+    studyTime varchar(100) NOT NULL,
     studyActivities varchar(100) NOT NULL,
-    studyAdjustments bool NOT NULL,
+    studyAdjustments varchar(100) NOT NULL,
     weekdaySleeptime time NOT NULL,
     weekendSleeptime time NOT NULL,
     sleepActivities varchar(100) NOT NULL,
@@ -109,7 +108,7 @@ CREATE TABLE RoommateAgreement (
     roommate2PetPeeves varchar(100) NOT NULL,
     guestPermission varchar(100) NOT NULL,
     guestPrivacy varchar(100) NOT NULL,
-    whenLocked char(2) NOT NULL,
+    whenLocked varchar(100) NOT NULL,
     alcoholDrugs bool NOT NULL,
     temperature varchar(100) NOT NULL,
     damage varchar(100) NOT NULL,
@@ -146,6 +145,3 @@ ALTER TABLE RoommateAgreement ADD CONSTRAINT RoommateAgreement_Community FOREIGN
 -- Reference: RoommateAgreement_Employee (table: RoommateAgreement)
 ALTER TABLE RoommateAgreement ADD CONSTRAINT RoommateAgreement_Employee FOREIGN KEY RoommateAgreement_Employee (caID)
     REFERENCES Employee (empID);
-
--- End of file.
-

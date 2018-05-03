@@ -23,7 +23,7 @@
 	<p align="center">In case of a roommate conflict, please reference the following Roommate Agreement and make changes where necessary. You may also delete a Roommate Agreement if two residents no longer live together. <b>Only remove a Roommate Agreement with the permission of your supervisor</b></p><br>
 
 <form method="post" action="/deleteAgreement/<%= Agreement[0].agreementID %>">
-  <p align = "center"><button type="submit" class="btn btn-warning btn-lg">Delete</button></p>
+  <p align = "center"><button type="submit" onclick="return confirm('Are you sure you want to delete this Roommate Agreement?');" class="btn btn-warning btn-lg">Delete</button></p>
 </form><br>
 
 	<!-- AGREEMENT FORM -->

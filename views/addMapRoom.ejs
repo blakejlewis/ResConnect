@@ -27,15 +27,15 @@
 		<form action="/addMapRoom/<%= communityMap[0].mapID %>/<%= mapRoom %>" method="post">
 			<div class="form-group">
 				<label>Room Number</label>
-				<input type="number" class="form-control" name="roomNumber">
+				<input type="number" class="form-control" name="roomNumber" required>
 			</div>
 			<div class="form-group">
 				<label>Resident 1</label>
-				<input type="text" class="form-control" name="resident1">
+				<input type="text" class="form-control" name="resident1" required>
 			</div>
 			<div class="form-group">
 				<label>Resident 2</label>
-				<input type="text" class="form-control" name="resident2">
+				<input type="text" class="form-control" name="resident2" required>
 			</div>
 			<div class="form-group">
 				<label>Room standing in community:</label><br>
@@ -68,7 +68,8 @@
 			</div>
 			<div class="form-group">
 				<label>Please indicate the rooms this room connects with often as well as at least one new fact and interaction with each resident of this room.</label>
-				<input type="text" class="form-control" name="factsAndInteractions">
+				<textarea name="factsAndInteractions" class="form-control" rows=
+				"4" required></textarea>
 			</div>
 	</div>
 

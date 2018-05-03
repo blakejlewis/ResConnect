@@ -56,7 +56,9 @@
 
 				<h3>Event Name: <%= Proposals[i].eventName%></h3>
 				<p>Proposer(s): <%= Proposals[i].programProposer%></p>
-				<p>Date and Time: <%= Proposals[i].eventDateTime%></p>
+				<%if (Proposals[i].eventDateTime !== "0000-00-00 00:00:00") {%>
+					<p>Date and Time: <%= Proposals[i].eventDateTime.getMonth() + 1%>/<%= Proposals[i].eventDateTime.getDate()%>/<%= Proposals[i].eventDateTime.getFullYear()%> at <%=Proposals[i].eventDateTime.getHours()%>:<%=Proposals[i].eventDateTime.getMinutes()%>0</p>
+				<%}%>
 			</div>
 		</a>
 	<% } %>
